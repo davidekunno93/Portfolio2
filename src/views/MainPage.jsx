@@ -405,9 +405,9 @@ const MainPage = () => {
                                         <ButtonMailto label="matramere@gmail.com" mailto="mailto:matramere@gmail.com" />
                                     </div>
                                     <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/' className='black-text'>
-                                        <div className="flx-r gap-2">
+                                        <div className="flx-r gap-2 no-cursor">
                                             <img src="https://i.imgur.com/xiXGWUQ.png" alt="" className="img-xxsmall" />
-                                            <p className="m-0 about-me-link no-cursor">David Ekunno</p>
+                                            <p className="m-0 about-me-link">David Ekunno</p>
                                         </div></Link>
                                 </div>
 
@@ -700,9 +700,9 @@ const MainPage = () => {
                     </div>
                 </div>
                 <div className="footer flx-c gap-2">
-                    <p className="m-0 white-text">Thank you for viewing my portfolio. Send me a message above, or use my LinkedIn profile or email to get in touch.</p>
+                    <p className="m-0 white-text">Thank you for viewing my portfolio. Send me a message above, or use my LinkedIn profile to get in touch.</p>
                     <div className="flx">
-                        <Link><div className="align-all-items gap-2">
+                        <Link target='_blank' to='https://github.com/davidekunno93/Portfolio2.git'><div className="align-all-items gap-2">
                             <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />
                             <p className="m-0 white-text">Portfolio GitHub Link</p>
                         </div>
