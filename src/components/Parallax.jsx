@@ -8,7 +8,7 @@ const Parallax = () => {
         offset: ["start start", "end start"],
     });
     const foreground = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-    const background = useTransform(scrollYProgress, [0, 1], ["0%", "40%"]);
+    const background = useTransform(scrollYProgress, [0, 1], ["0%", "60%"]);
 
     return (
         <>

@@ -275,7 +275,7 @@ const MainPage = () => {
             formContents.classList.remove('d-none')
             wait(100).then(() => {
                 formContents.classList.remove('hidden-down-o')
-                
+
             })
         })
     }
@@ -382,7 +382,12 @@ const MainPage = () => {
 
                             <div className="right-side flx-c just-ce flx-3">
 
-                                <div className="section-title">About Me</div>
+                                <div className="flx">
+                                    <div className="title-box">
+                                        <p className="m-0 section-title">About Me</p>
+                                        <div className="title-paint"></div>
+                                    </div>
+                                </div>
                                 <p className="section-text bold500">
                                     <span className='x-large bold600 dark-text'>Hi, I'm David...</span> <br />
                                     I found Python in 2022 and the rest is history. I'm a Junior Frontend Developer
@@ -397,7 +402,12 @@ const MainPage = () => {
                                     When I'm not coding, I enjoy creating artistic videos, dancing and playing or watching
                                     soccer.
                                 </p>
-                                <div className="section-subtitle">Contact Information</div>
+                                <div className="flx">
+                                    <div className="title-box">
+                                        <p className="m-0 section-subtitle">Contact Information</p>
+                                        <div className="subtitle-paint"></div>
+                                    </div>
+                                </div>
                                 <div className="section-content pl-4 flx-r gap-8">
                                     <div className="flx-r gap-2">
                                         <span className="material-symbols-outlined">mail</span>
@@ -457,7 +467,13 @@ const MainPage = () => {
                 </div>
 
 
-                <div ref={refProjects} className="section-title center-tex ml-6 py-8">Recent Projects</div>
+                <div ref={refProjects} className="flx ml-6 py-8">
+                    <div className="title-box">
+                        <p className="m-0 section-title">Recent Projects</p>
+                        <div className="title-paint"></div>
+                    </div>
+
+                </div>
                 <div className="projects-section my-8">
 
                     <div className="carousel-window">
@@ -504,7 +520,12 @@ const MainPage = () => {
                                                     }
                                                 </div>
                                                 <div className="card-text">
-                                                    <p className="title">{project.title}</p>
+                                                    {/* <div className="flx"> */}
+                                                        {/* <div className="title-box m-auto"> */}
+                                                            <p className="m-0 title">{project.title}</p>
+                                                            {/* <div className="title-paint"></div>
+                                                        </div>
+                                                    </div> */}
                                                     <p className="text-body">{project.desc}</p>
                                                     <div className="desktop-phone flx-r just-ce gap-4">
                                                         <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />

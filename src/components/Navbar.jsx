@@ -9,17 +9,26 @@ const Navbar = () => {
         let navbar = document.getElementById('navbar')
         let links = document.getElementById('navbarContactLinks')
         let resumeBtn = document.getElementById('resumeBtn')
+        let bottomLines = document.querySelectorAll('.bottom-line')
+        // console.log(bottomLines)
         // let navOptions = document.getElementById('navOptions')
 
         if (window.scrollY > window.innerHeight * 0.9) {
             navbar.classList.add('black-bg')
             links.classList.add('show-links')
             resumeBtn.classList.replace('resume-primary', 'resume-secondary')
+            for (let i=0;i<bottomLines.length;i++) {
+                // console.log(bottomLines[i])
+                bottomLines[i].classList.replace('bottom-line-black', 'bottom-line-white')
+            }
             // navOptions.classList.remove('bold600')
         } else {
             navbar.classList.remove('black-bg')
             links.classList.remove('show-links')
             resumeBtn.classList.replace('resume-secondary', 'resume-primary')
+            for (let i=0;i<bottomLines.length;i++) {
+                bottomLines[i].classList.replace('bottom-line-white', 'bottom-line-black')
+            }
             // navOptions.classList.add('bold600')
         }
     }
@@ -70,19 +79,24 @@ const Navbar = () => {
             <div id='navOptions' className="navbar-options">
 
                 <div onClick={() => scrollToTop()} className="option">
-                    Home
+                    <p className="m-0">Home</p>
+                    <div className="bottom-line bottom-line-black"></div>
                 </div>
                 <div onClick={() => scrollToSection(refAbout)} className="option">
-                    About
+                    <p className="m-0">About</p>
+                    <div className="bottom-line bottom-line-black"></div>
                 </div>
                 <div onClick={() => scrollToSection(refSkills)} className="option">
-                    Skills
+                    <p className="m-0">Skills</p>
+                    <div className="bottom-line bottom-line-black"></div>
                 </div>
                 <div onClick={() => scrollToSection(refProjects)} className="option">
-                    Projects
+                    <p className="m-0">Projects</p>
+                    <div className="bottom-line bottom-line-black"></div>
                 </div>
                 <div onClick={() => setContactModalOpen(true)} className="option">
-                    Contact Me
+                    <p className="m-0">Contact Me</p>
+                    <div className="bottom-line bottom-line-black"></div>
                 </div>
                 <div className="option position-right">
                     <Link target='_blank' to='https://magenta-nissie-77.tiiny.site'><button id='resumeBtn' className="resume-primary">

@@ -1668,8 +1668,32 @@ button:focus-visible {
   font-size: 14px;
   font-family: 'Plus Jakarta Sans';
   font-weight: 500;
+  position: relative;
   /* font-family: 'Montserrat'; */
+  /* border-bottom: 3px solid black; */
 }
+.option .bottom-line {
+  position: absolute;
+  height: 2px;
+  width: 0%;
+  /* background-color: black; */
+  /* bottom: 0 */
+  left: 50%;
+  transform: translate(-50%, 4px);
+  transition: 0.2s;
+}
+.option:hover .bottom-line {
+  width: 100%;
+  transition: 0.3s;
+}
+.option .bottom-line-black {
+  background-color: black;
+}
+
+.option .bottom-line-white {
+  background-color: white;
+}
+
 .navbar-contact-links {
   transform: translateX(75%);
   transition: 0.4s;
@@ -1680,6 +1704,28 @@ button:focus-visible {
   opacity: 1;
   transform: translateX(125%);
   visibility: visible;
+}
+.title-box {
+  position: relative;
+  z-index: 0;
+}
+.title-paint {
+  position: absolute;
+  width: 100%;
+  height: 30%;
+  background-color: salmon;
+  bottom: 0;
+  transform: translate(2%, -30%);
+  z-index: -1;
+}
+.subtitle-paint {
+  position: absolute;
+  width: 100%;
+  height: 35%;
+  background-color: salmon;
+  bottom: 0;
+  transform: translate(2%, -10%);
+  z-index: -1;
 }
 .section-title {
   font-size: 48px;
