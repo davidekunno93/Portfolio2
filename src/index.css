@@ -1678,12 +1678,14 @@ button:focus-visible {
   width: 0%;
   /* background-color: black; */
   /* bottom: 0 */
+  opacity: 0;
   left: 50%;
   transform: translate(-50%, 4px);
   transition: 0.2s;
 }
 .option:hover .bottom-line {
   width: 100%;
+  opacity: 1;
   transition: 0.3s;
 }
 .option .bottom-line-black {
