@@ -7,6 +7,7 @@ import Parallax from '../components/Parallax'
 import emailjs from '@emailjs/browser';
 
 const MainPage = () => {
+    const { mobileMode } = useContext(DataContext);
     const { contactModalOpen, setContactModalOpen } = useContext(DataContext);
     const { refAbout, refSkills, refProjects } = useContext(DataContext);
 
@@ -18,12 +19,26 @@ const MainPage = () => {
             behavior: "smooth"
         })
     }
-
+    // email link code
     const ButtonMailto = ({ mailto, label }) => {
         return (
             <Link
                 to='#'
                 className='about-me-link font-jakarta no-cursor'
+                onClick={(e) => {
+                    window.location.href = mailto;
+                    e.preventDefault();
+                }}
+            >
+                {label}
+            </Link>
+        );
+    };
+    const ButtonMailtoIcon = ({ mailto, label }) => {
+        return (
+            <Link
+                to='#'
+                className='material-symbols-outlined dark-text'
                 onClick={(e) => {
                     window.location.href = mailto;
                     e.preventDefault();
@@ -228,29 +243,66 @@ const MainPage = () => {
     }, [])
 
 
-    // email code
-    const form = useRef(null);
-    const sendEmail = (e) => {
+    // bubble message email code
+    const bubbleForm = useRef(null);
+    const sendEmail = (e, source) => {
         e.preventDefault();
 
-        emailjs
-            .sendForm('service_whvz2lp', 'template_mgey1wr', form.current, {
-                publicKey: 'jztdvyE6Mt3hbXk94',
-            })
-            .then(
-                () => {
-                    messageSentAnimation()
-                    console.log('Succesfully sent message');
-                },
-                (error) => {
-                    console.log('Failed to send message', error);
-                    alert("Message Failed. Please try again")
-                    console.log('not working')
-                },
-            );
+        if (source === "bubbleEmail") {
+            emailjs
+                .sendForm('service_whvz2lp', 'template_mgey1wr', bubbleForm.current, {
+                    publicKey: 'jztdvyE6Mt3hbXk94',
+                })
+                .then(
+                    () => {
+                        bubbleMessageSentAnimation()
+                        console.log('Succesfully sent message');
+                    },
+                    (error) => {
+                        console.log('Failed to send message', error);
+                        alert("Message Failed. Please try again")
+                        console.log('not working')
+                    },
+                );
+        } else if (source === "mobileEmail") {
+            emailjs
+                .sendForm('service_whvz2lp', 'template_mgey1wr', mobileForm.current, {
+                    publicKey: 'jztdvyE6Mt3hbXk94',
+                })
+                .then(
+                    () => {
+                        mobileMessageSentAnimation()
+                        console.log('Succesfully sent message');
+                    },
+                    (error) => {
+                        console.log('Failed to send message', error);
+                        alert("Message Failed. Please try again")
+                        console.log('not working')
+                    },
+                );
+        }
     };
 
-    const messageSentAnimation = () => {
+    const refMobileFormContents = useRef(null);
+    const refMobileFormSent = useRef(null);
+    const mobileEmailInput = useRef(null);
+    const mobileMessageInput = useRef(null);
+    const mobileMessageSentAnimation = () => {
+        refMobileFormContents.current.classList.add('sent') 
+        wait(500).then(() => {
+            refMobileFormSent.current.classList.remove('hidden-down3-o') 
+        })
+    }
+    const resetMobileMessage = () => {
+        mobileEmailInput.current.value = ""
+        mobileMessageInput.current.value = ""
+        refMobileFormSent.current.classList.add('hidden-down3-o') 
+        wait(500).then(() => {
+            refMobileFormContents.current.classList.remove('sent') 
+        })
+    }
+
+    const bubbleMessageSentAnimation = () => {
         let formContents = document.getElementById('formContents')
         let formSent = document.getElementById('formSent')
 
@@ -262,7 +314,7 @@ const MainPage = () => {
 
         })
     }
-    const resetMessage = () => {
+    const resetBubbleMessage = () => {
         let formContents = document.getElementById('formContents')
         let formSent = document.getElementById('formSent')
         let email = document.getElementById('bubbleEmail')
@@ -280,12 +332,21 @@ const MainPage = () => {
         })
     }
 
+    // mobile message email code
+    const mobileForm = useRef(null);
+
+
+    // other code
     const printTest = () => {
         console.log('print')
     }
     const wait = (ms) => {
         return new Promise((resolve) => setTimeout(resolve, ms))
     }
+
+    useEffect(() => {
+        console.log("Mobile Mode: " + mobileMode)
+    }, [])
 
     return (
         <>
@@ -323,19 +384,25 @@ const MainPage = () => {
 
                 <div className="hero-section">
 
-                    <div className="hero-absolute">
-                        <div className="left-side flx-1 flx">
+                    <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
+                        <div className={`${mobileMode ? "bottom-side" : "left-side"} flx-1 flx`}>
                             <div className="text-composition flx-c gap-5 m-auto">
-                                <div className="text-group dark-text">
-                                    <p className="m-0 xxx-large bold700">Hi, I'm David</p>
-                                    <p className="m-0 x-large my-1">Frontend Developer</p>
-                                    <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX. I have a good understanding of all sides of development.</p>
+                                <div className={`text-group ${mobileMode && "center-text"} dark-text`}>
+
+                                    <p className={`m-0 ${mobileMode ? "xx-large" : "xxx-large"} bold700`}>Hi, I'm&nbsp;
+                                        <span className="title-box">David
+                                            {/* <div className="spantext-paint"></div> */}
+                                        </span>
+                                    </p>
+
+                                    <p className={`m-0 ${mobileMode ? "medium" : "x-large"} my-1`}>Frontend Developer</p>
+                                    <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX familiar with of all sides of development.</p>
                                 </div>
-                                <div className="flx">
+                                <div className={`flx ${mobileMode && "just-ce"}`}>
                                     <button onClick={() => scrollToSection(refProjects)} className="btn-primary"><p className="m-0">View My Work</p></button>
                                 </div>
 
-                                <div className="socials bold600 flx-r gap-8">
+                                <div className={`socials bold600 flx-r ${mobileMode && "just-ce"} gap-8`}>
                                     <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/'><div className="social-link align-all-items gap-2">
                                         <img src="https://i.imgur.com/WBpcM53.png" alt="" className="img-xxsmall" />
                                         <p className="m-0 dark-text">LinkedIn</p>
@@ -347,31 +414,36 @@ const MainPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="right-side flx-1">
-                            <img src="https://i.imgur.com/g0ZSvBo.png" alt="" className="img-fit" />
+                        <div className={`${mobileMode ? "top-side" : "right-side"} flx flx-1`}>
+                            {mobileMode ?
+                                <img src="https://i.imgur.com/mvsaat6.png" alt="" className="img-fit-80 position-bottom-modified" />
+                                :
+                                <img src="https://i.imgur.com/g0ZSvBo.png" alt="" className="img-fit" />
+                            }
                         </div>
                     </div>
-
-                    <Parallax />
+                    {!mobileMode &&
+                        <Parallax />
+                    }
                 </div>
 
-                <div ref={refAbout} onMouseEnter={() => addCursorStyle()} onMouseLeave={() => removeCursorStyle()} className="about-me-section flx-r mb-8">
+                <div ref={refAbout} onMouseEnter={() => addCursorStyle()} onMouseLeave={() => removeCursorStyle()} className={`about-me-section`}>
 
                     <div className="cursor-dot" data-cursor-dot></div>
                     <div className="cursor-outline" data-cursor-outline></div>
 
-                    <Fade fraction={0.75} triggerOnce className='about-me-section'>
-                        <div className="flx-r">
+                    <Fade fraction={mobileMode ? 0.5 : 0.75} triggerOnce className='about-me-section'>
+                        <div className={`${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
 
-                            <div className="left-side flx-1 flx-c just-ce font-monty-bold dark-text">
-                                <Slide fraction={0.75} direction='left' triggerOnce>
-                                    <div className="years-experience my-4 ml-6">
+                            <div className={`left-side flx-1 ${mobileMode ? "flx-r gap-2" : "flx-c ml-6"} just-se font-monty-bold`}>
+                                <Slide fraction={mobileMode ? 0.5 : 0.75} direction='left' triggerOnce>
+                                    <div className={`years-experience my-4 ${mobileMode && "flx-c align-c center-text px-4"}`}>
                                         <div className="flx">
                                             <div className="value xxx-large">2+</div>
                                         </div>
                                         <div className="title large">Years of experience</div>
                                     </div>
-                                    <div className="projects-worked my-5 ml-6">
+                                    <div className={`projects-worked my-4  ${mobileMode && "flx-c align-c center-text px-4"}`}>
                                         <div className="flx">
                                             <div className="value xxx-large">7</div>
                                         </div>
@@ -382,42 +454,49 @@ const MainPage = () => {
 
                             <div className="right-side flx-c just-ce flx-3">
 
-                                <div className="flx">
+                                <div className={`flx ${mobileMode && "just-ce"}`}>
                                     <div className="title-box">
                                         <p className="m-0 section-title">About Me</p>
                                         <div className="title-paint"></div>
                                     </div>
                                 </div>
-                                <p className="section-text bold500">
+                                <p className={`section-text ${mobileMode && "mobile"} bold500`}>
                                     <span className='x-large bold600 dark-text'>Hi, I'm David...</span> <br />
                                     I found Python in 2022 and the rest is history. I'm a Junior Frontend Developer
                                     and have exceled very quickly in this field. I have a passion for creating
                                     logical solutions and software development gives me the opportunity to do just that.</p>
-                                <p className="section-text bold500">
+                                <p className={`section-text ${mobileMode && "mobile"} bold500`}>
                                     I produce smooth and intuitive web applications that optimize for user experience and
                                     functionality. I enjoy creative design but I also excel at re-creating already made designs
                                     into functional web applications. I thrive in coordinating development with backend
                                     because I have a lot of experience in backend development.</p>
-                                <p className="section-text bold500">
+                                <p className={`section-text ${mobileMode && "mobile"} bold500`}>
                                     When I'm not coding, I enjoy creating artistic videos, dancing and playing or watching
                                     soccer.
                                 </p>
-                                <div className="flx">
+                                <div className={`flx ${mobileMode && "just-ce"}`}>
                                     <div className="title-box">
-                                        <p className="m-0 section-subtitle">Contact Information</p>
+                                        <p className={`m-0 section-subtitle ${mobileMode && "mobile"}`}>Contact Information</p>
                                         <div className="subtitle-paint"></div>
                                     </div>
                                 </div>
-                                <div className="section-content pl-4 flx-r gap-8">
-                                    <div className="flx-r gap-2">
-                                        <span className="material-symbols-outlined">mail</span>
-                                        {/* <p className="m-0">matramere@gmail.com</p> */}
-                                        <ButtonMailto label="matramere@gmail.com" mailto="mailto:matramere@gmail.com" />
+                                <div className={`section-content ${mobileMode ? "mobile just-ce mt-2" : "pl-4"} flx-r gap-8`}>
+                                    <div className="flx-r align-c gap-2">
+                                        {mobileMode ?
+                                            <ButtonMailtoIcon label="mail" mailto="mailto:matramere@gmail.com" />
+                                            :
+                                            <span className="material-symbols-outlined">mail</span>
+                                        }
+                                        {!mobileMode &&
+                                            <ButtonMailto label="matramere@gmail.com" mailto="mailto:matramere@gmail.com" />
+                                        }
                                     </div>
                                     <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/' className='black-text'>
-                                        <div className="flx-r gap-2 no-cursor">
+                                        <div className="flx-r align-c gap-2 no-cursor">
                                             <img src="https://i.imgur.com/xiXGWUQ.png" alt="" className="img-xxsmall" />
-                                            <p className="m-0 about-me-link">David Ekunno</p>
+                                            {!mobileMode &&
+                                                <p className="m-0 about-me-link">David Ekunno</p>
+                                            }
                                         </div></Link>
                                 </div>
 
@@ -430,17 +509,27 @@ const MainPage = () => {
 
                 <div ref={refSkills} className="skills-section py-8">
                     {/* <div className="section-title ml-5">My Skills</div> */}
+                    {mobileMode &&
+                        <div className={`flx just-ce`}>
+                            <div className="title-box mb-3">
+                                <p className={`m-0 section-subtitle`}>Technical Skills</p>
+                                <div className={`title-paint`}></div>
+                            </div>
+                        </div>
+                    }
                     <Fade fraction={0.8} triggerOnce>
                         <Slide fraction={0.8} direction='down' triggerOnce>
                             <div className="technologies flx-r flx-wrap just-se my-4">
                                 {techImgs.map((tech, index) => {
                                     if (index < 6) {
                                         return <div className="tech-img-wrap">
-                                            <img className="img-medium-height" src={tech.imgUrl} />
-                                            <div className="info position-absolute">
-                                                <p className="m-0">{tech.tech}</p>
-                                                <p className="m-0 small">{tech.exp} Exp</p>
-                                            </div>
+                                            <img className={`${mobileMode ? "img-small-h" : "img-medium-h"}`} src={tech.imgUrl} />
+                                            {!mobileMode &&
+                                                <div className="info position-absolute">
+                                                    <p className="m-0">{tech.tech}</p>
+                                                    <p className="m-0 small">{tech.exp} Exp</p>
+                                                </div>
+                                            }
                                         </div>
                                     }
                                 })}
@@ -453,11 +542,13 @@ const MainPage = () => {
                                 {techImgs.map((tech, index) => {
                                     if (index >= 6) {
                                         return <div className="tech-img-wrap">
-                                            <img className="img-medium-height" src={tech.imgUrl} />
-                                            <div className="info position-absolute">
-                                                <p className="m-0">{tech.tech}</p>
-                                                <p className="m-0 small">{tech.exp} Exp</p>
-                                            </div>
+                                            <img className={`${mobileMode ? "img-small-h" : "img-medium-h"}`} src={tech.imgUrl} />
+                                            {!mobileMode &&
+                                                <div className="info position-absolute">
+                                                    <p className="m-0">{tech.tech}</p>
+                                                    <p className="m-0 small">{tech.exp} Exp</p>
+                                                </div>
+                                            }
                                         </div>
                                     }
                                 })}
@@ -467,10 +558,10 @@ const MainPage = () => {
                 </div>
 
 
-                <div ref={refProjects} className="flx ml-6 py-8">
+                <div ref={refProjects} className={`flx ${mobileMode ? "just-ce mb-8" : "ml-6 py-8"}`}>
                     <div className="title-box">
-                        <p className="m-0 section-title">Recent Projects</p>
-                        <div className="title-paint"></div>
+                        <p className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
+                        <div className={`title-paint`}></div>
                     </div>
 
                 </div>
@@ -480,11 +571,11 @@ const MainPage = () => {
                         <div className="inner" style={{ transform: `translateX(-${projectIndex * 100}%)` }}>
                             <div className="carousel-item">
 
-                                <div className="project-page flx-c">
+                                <div className={`project-page flx-c ${mobileMode && "pt-4"}`}>
                                     {projects.map((project, index) => {
                                         let even = (index + 1) % 2 === 0
                                         if (index < 3) {
-                                            return <div key={index} className={`project-card ${even ? "flx-r-reverse" : "flx-r"}`}>
+                                            return <div key={index} className={`project-card ${mobileMode ? "flx-c align-c" : even ? "flx-r-reverse" : "flx-r"}`}>
                                                 <div className="w-50 flx just-ce">
                                                     {project.website ?
                                                         <Link target='_blank' to={project.website}><div className="window-container-outer pointer">
@@ -494,9 +585,9 @@ const MainPage = () => {
                                                                 }
                                                                 <p className="m-0 large">{project.title}</p>
                                                             </div>
-                                                            <div className="window-container">
-                                                                <div className={even ? "card-window-r" : "card-window-l"}>
-                                                                    <img src={project.imgUrl} alt="" className={even ? " img-custom-r" : "img-custom-l"} />
+                                                            <div className={`window-container ${mobileMode && "mobile"}`}>
+                                                                <div className={mobileMode ? "card-window" : even ? "card-window-r" : "card-window-l"}>
+                                                                    <img src={project.imgUrl} alt="" className={mobileMode ? "img-custom" : even ? " img-custom-r" : "img-custom-l"} />
 
                                                                 </div>
                                                             </div>
@@ -511,23 +602,18 @@ const MainPage = () => {
                                                                 <p className="m-0">(Website not deployed)</p>
                                                             </div>
                                                             <div className="window-container">
-                                                                <div className={even ? "card-window-r" : "card-window-l"}>
-                                                                    <img src={project.imgUrl} alt="" className={even ? " img-custom-r" : "img-custom-l"} />
+                                                                <div className={mobileMode ? "card-window" : even ? "card-window-r" : "card-window-l"}>
+                                                                    <img src={project.imgUrl} alt="" className={mobileMode ? "img-custom" : even ? " img-custom-r" : "img-custom-l"} />
 
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
                                                 </div>
-                                                <div className="card-text">
-                                                    {/* <div className="flx"> */}
-                                                        {/* <div className="title-box m-auto"> */}
-                                                            <p className="m-0 title">{project.title}</p>
-                                                            {/* <div className="title-paint"></div>
-                                                        </div>
-                                                    </div> */}
+                                                <div className={`card-text ${mobileMode && "mobile"}`}>
+                                                    <p className="m-0 title">{project.title}</p>
                                                     <p className="text-body">{project.desc}</p>
-                                                    <div className="desktop-phone flx-r just-ce gap-4">
+                                                    <div className={`desktop-phone flx-r just-ce gap-4 ${mobileMode && "mb-4"}`}>
                                                         <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />
                                                         {project.responsive &&
                                                             <img src="https://i.imgur.com/n96bwGO.png" alt="" className="img-xxsmall-h" />
@@ -542,18 +628,31 @@ const MainPage = () => {
                                                                 </div>
                                                             })}
                                                         </div>
-                                                        <div className="weblinks flx-r gap-12 bold600 just-ce my-4">
-                                                            {project.website &&
-                                                                <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
-                                                                    <span className="material-symbols-outlined">language</span>
-                                                                    <p className="m-0">Website</p>
+                                                        {!mobileMode ?
+                                                            <div className="weblinks flx-r gap-12 bold600 just-ce my-4">
+                                                                {project.website &&
+                                                                    <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
+                                                                        <span className="material-symbols-outlined">language</span>
+                                                                        <p className="m-0">Website</p>
+                                                                    </div></Link>
+                                                                }
+                                                                <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
+                                                                    <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
+                                                                    <p className="m-0">GitHub</p>
                                                                 </div></Link>
-                                                            }
-                                                            <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
-                                                                <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
-                                                                <p className="m-0">GitHub</p>
-                                                            </div></Link>
-                                                        </div>
+                                                            </div>
+                                                            :
+                                                            <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
+                                                                <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
+                                                                    <div className="material-symbols-outlined">language</div>
+                                                                    <p className="m-0">Website</p>
+                                                                </button></Link>
+                                                                <Link target='_blank' to={project.github}><button className="btn-tertiary flx-r gap-2 align-c">
+                                                                    <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />
+                                                                    <p className="m-0">GitHub</p>
+                                                                </button></Link>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -565,11 +664,11 @@ const MainPage = () => {
 
                             <div className="carousel-item">
 
-                                <div className="project-page flx-c">
+                                <div className={`project-page flx-c ${mobileMode && "pt-4"}`}>
                                     {projects.map((project, index) => {
                                         let even = (index + 1) % 2 === 0
                                         if (index >= 3 && index < 6) {
-                                            return <div key={index} className={`project-card ${!even ? "flx-r-reverse" : "flx-r"}`}>
+                                            return <div key={index} className={`project-card ${mobileMode ? "flx-c align-c" : !even ? "flx-r-reverse" : "flx-r"}`}>
                                                 <div className="w-50 flx just-ce">
                                                     {project.website ?
                                                         <Link target='_blank' to={project.website}><div className="window-container-outer pointer">
@@ -579,9 +678,9 @@ const MainPage = () => {
                                                                 }
                                                                 <p className="m-0 large">{project.title}</p>
                                                             </div>
-                                                            <div className="window-container">
-                                                                <div className={!even ? "card-window-r" : "card-window-l"}>
-                                                                    <img src={project.imgUrl} alt="" className={!even ? " img-custom-r" : "img-custom-l"} />
+                                                            <div className={`window-container ${mobileMode && "mobile"}`}>
+                                                                <div className={mobileMode ? "card-window" : !even ? "card-window-r" : "card-window-l"}>
+                                                                    <img src={project.imgUrl} alt="" className={mobileMode ? "img-custom" : !even ? " img-custom-r" : "img-custom-l"} />
 
                                                                 </div>
                                                             </div>
@@ -595,19 +694,19 @@ const MainPage = () => {
                                                                 <p className="m-0 large">{project.title}</p>
                                                                 <p className="m-0">(Website not deployed)</p>
                                                             </div>
-                                                            <div className="window-container">
-                                                                <div className={even ? "card-window-r" : "card-window-l"}>
-                                                                    <img src={project.imgUrl} alt="" className={even ? " img-custom-r" : "img-custom-l"} />
+                                                            <div className={`window-container ${mobileMode && "mobile"}`}>
+                                                                <div className={mobileMode ? "card-window" : even ? "card-window-r" : "card-window-l"}>
+                                                                    <img src={project.imgUrl} alt="" className={mobileMode ? "img-custom" : even ? " img-custom-r" : "img-custom-l"} />
 
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     }
                                                 </div>
-                                                <div className="card-text">
+                                                <div className={`card-text ${mobileMode && "mobile"}`}>
                                                     <p className="title">{project.title}</p>
                                                     <p className="text-body">{project.desc}</p>
-                                                    <div className="desktop-phone flx-r just-ce gap-4">
+                                                    <div className={`desktop-phone flx-r just-ce gap-4 ${mobileMode && "mb-4"}`}>
                                                         <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />
                                                         {project.responsive &&
                                                             <img src="https://i.imgur.com/n96bwGO.png" alt="" className="img-xxsmall-h" />
@@ -622,18 +721,31 @@ const MainPage = () => {
                                                                 </div>
                                                             })}
                                                         </div>
-                                                        <div className="weblinks flx-r gap-12 bold600 just-ce my-4">
-                                                            {project.website &&
-                                                                <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
-                                                                    <span className="material-symbols-outlined">language</span>
-                                                                    <p className="m-0">Website</p>
+                                                        {!mobileMode ?
+                                                            <div className="weblinks flx-r gap-12 bold600 just-ce my-4">
+                                                                {project.website &&
+                                                                    <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
+                                                                        <span className="material-symbols-outlined">language</span>
+                                                                        <p className="m-0">Website</p>
+                                                                    </div></Link>
+                                                                }
+                                                                <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
+                                                                    <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
+                                                                    <p className="m-0">GitHub</p>
                                                                 </div></Link>
-                                                            }
-                                                            <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
-                                                                <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
-                                                                <p className="m-0">GitHub</p>
-                                                            </div></Link>
-                                                        </div>
+                                                            </div>
+                                                            :
+                                                            <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
+                                                                <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
+                                                                    <div className="material-symbols-outlined">language</div>
+                                                                    <p className="m-0">Website</p>
+                                                                </button></Link>
+                                                                <Link target='_blank' to={project.github}><button className="btn-tertiary flx-r gap-2 align-c">
+                                                                    <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />
+                                                                    <p className="m-0">GitHub</p>
+                                                                </button></Link>
+                                                            </div>
+                                                        }
                                                     </div>
                                                 </div>
                                             </div>
@@ -661,14 +773,14 @@ const MainPage = () => {
                 </div>
 
                 <div className="footer-section position-relative mt-12">
-                    <p onClick={() => messageSentAnimation()} className="m-0 mt-8 section-title">Send me a message...</p>
-                    <div className="profile-card mt-5">
-                        <div className="profile-card-imgDiv">
-                            <img src="https://i.imgur.com/3BwhEn7.jpg" alt="" className="profile-card-img" />
+                    <p className={`m-0 mt-8 ${mobileMode ? "section-subtitle center-text" : "section-title"}`}>Send me a message</p>
+                    <div className={`profile-card ${mobileMode && "mobile"} mt-5`}>
+                        <div className={`profile-card-imgDiv ${mobileMode && "mobile"}`}>
+                            <img src="https://i.imgur.com/3BwhEn7.jpg" alt="" className={`profile-card-img ${mobileMode && "mobile"}`} />
                         </div>
-                        <div className="profile-card-text">
-                            <p className="m-0 title">David Ekunno</p>
-                            <p className="m-0 subtitle">Frontend Developer</p>
+                        <div className={`profile-card-text ${mobileMode && "mobile"}`}>
+                            <p className={`m-0 title ${mobileMode && "mobile"}`}>David Ekunno</p>
+                            <p className={`m-0 subtitle ${mobileMode && "mobile"}`}>Frontend Developer</p>
                             <div className="socials mt-2 bold600 flx-r gap-8">
                                 <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/'><div className="social-link align-all-items gap-2">
                                     <img src="https://i.imgur.com/xiXGWUQ.png" alt="" className="img-xxsmall" />
@@ -683,7 +795,7 @@ const MainPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="message-bubble flx-c just-ce">
+                    <div className={`message-bubble ${mobileMode && "d-none"} flx-c just-ce`}>
                         <Fade fraction={0.8} delay={200} triggerOnce>
                             <Slide fraction={0.8} direction='up' triggerOnce>
 
@@ -693,14 +805,14 @@ const MainPage = () => {
                                     <div className="flx">
                                         <img src="https://i.imgur.com/ZbTlD9h.png" alt="" className="img-medium m-auto" />
                                     </div>
-                                    <p onClick={() => resetMessage()} className="m-0 white-text o-50 center-text pointer">Click to send another message</p>
+                                    <p onClick={() => resetBubbleMessage()} className="m-0 white-text o-50 center-text pointer">Click to send another message</p>
 
                                 </div>
 
 
                                 <div id='formContents' className='formContents'>
 
-                                    <form ref={form} onSubmit={sendEmail} className="flx-c gap-4">
+                                    <form ref={bubbleForm} onSubmit={(e) => sendEmail(e, "bubbleEmail")} className="flx-c gap-4">
 
                                         <div className="align-all-items gap-2 just-ce white-text">
                                             <span className="material-symbols-outlined">mail</span>
@@ -720,8 +832,39 @@ const MainPage = () => {
                         </Fade>
                     </div>
                 </div>
+                {mobileMode &&
+                    <div className="message-section position-relative">
+
+                        <div ref={refMobileFormSent} id='mobileFormSent' className="formSent flx-c gap-3 hidden-down3-o">
+                            <p className="m-0 white-text bold600 x-large center-text">Message Sent</p>
+                            <div className="flx">
+                                <img src="https://i.imgur.com/ZbTlD9h.png" alt="" className="img-medium m-auto" />
+                            </div>
+                            <p onClick={() => resetMobileMessage()} className="m-0 white-text o-50 center-text pointer">Click to send another message</p>
+
+                        </div>
+
+                        <div ref={refMobileFormContents} id='mobileFormContents' className='formContents'>
+
+                            <form ref={mobileForm} onSubmit={(e) => sendEmail(e, "mobileEmail")} className="flx-c gap-4">
+
+                                <div className="align-all-items gap-2 just-ce white-text">
+                                    <span className="material-symbols-outlined">mail</span>
+                                    <p onClick={() => mobileMessageSentAnimation()} className="m-0">matramere@gmail.com</p>
+                                </div>
+
+                                <input ref={mobileEmailInput} id='mobileEmail' type="text" name='user_email' className="input-style center w-100 font-jakarta" placeholder='Your Email' autoComplete='off' />
+                                <textarea ref={mobileMessageInput} name="message" id="mobileMessage" className="textarea-style w-100 font-jakarta" placeholder='Your message' autoComplete='off'></textarea>
+                                <input id='mobileSend' type="submit" value="Send message" className="bubble-btn w-60 center pointer mb-4" />
+
+                            </form>
+                        </div>
+
+
+                    </div>
+                }
                 <div className="footer flx-c gap-2">
-                    <p className="m-0 white-text">Thank you for viewing my portfolio. Send me a message above, or use my LinkedIn profile to get in touch.</p>
+                    <p className="m-0 white-text">Thank you for viewing my portfolio. Send me a message or get in touch on LinkedIn.</p>
                     <div className="flx">
                         <Link target='_blank' to='https://github.com/davidekunno93/Portfolio2.git'><div className="align-all-items gap-2">
                             <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />

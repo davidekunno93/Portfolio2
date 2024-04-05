@@ -5,8 +5,10 @@ import { DataContext } from '../context/DataProvider'
 const Navbar = () => {
     const { contactModalOpen, setContactModalOpen } = useContext(DataContext);
     const { refAbout, refSkills, refProjects } = useContext(DataContext);
+    const { mobileMode } = useContext(DataContext);
     const listenScrollEvent = (e) => {
         let navbar = document.getElementById('navbar')
+        let hamburger = document.getElementById('hamburgerIcon')
         let links = document.getElementById('navbarContactLinks')
         let resumeBtn = document.getElementById('resumeBtn')
         let bottomLines = document.querySelectorAll('.bottom-line')
@@ -16,18 +18,26 @@ const Navbar = () => {
         if (window.scrollY > window.innerHeight * 0.9) {
             navbar.classList.add('black-bg')
             links.classList.add('show-links')
-            resumeBtn.classList.replace('resume-primary', 'resume-secondary')
-            for (let i=0;i<bottomLines.length;i++) {
-                // console.log(bottomLines[i])
-                bottomLines[i].classList.replace('bottom-line-black', 'bottom-line-white')
+            if (resumeBtn) {
+                resumeBtn.classList.replace('resume-primary', 'resume-secondary')
+                for (let i = 0; i < bottomLines.length; i++) {
+                    // console.log(bottomLines[i])
+                    bottomLines[i].classList.replace('bottom-line-black', 'bottom-line-white')
+                }
+            } else {
+                hamburger.classList.add('white')
             }
             // navOptions.classList.remove('bold600')
         } else {
             navbar.classList.remove('black-bg')
             links.classList.remove('show-links')
-            resumeBtn.classList.replace('resume-secondary', 'resume-primary')
-            for (let i=0;i<bottomLines.length;i++) {
-                bottomLines[i].classList.replace('bottom-line-white', 'bottom-line-black')
+            if (resumeBtn) {
+                resumeBtn.classList.replace('resume-secondary', 'resume-primary')
+                for (let i = 0; i < bottomLines.length; i++) {
+                    bottomLines[i].classList.replace('bottom-line-white', 'bottom-line-black')
+                }
+            } else {
+                hamburger.classList.remove('white')
             }
             // navOptions.classList.add('bold600')
         }
@@ -65,7 +75,7 @@ const Navbar = () => {
         );
     };
     return (
-        <div id='navbar' className='navbar'>
+        <div id='navbar' className={`navbar ${mobileMode && "mobile"}`}>
             <div className="navbar-logo position-relative">
                 <p className="m-0">@davidekunno</p>
                 <div id='navbarContactLinks' className="navbar-contact-links position-absolute align-all-items gap-4">
@@ -78,7 +88,7 @@ const Navbar = () => {
             {/* social icons pop up after hero section - linkedin, github, email */}
             <div id='navOptions' className="navbar-options">
 
-                <div onClick={() => scrollToTop()} className="option">
+                {/* <div onClick={() => scrollToTop()} className="option">
                     <p className="m-0">Home</p>
                     <div className="bottom-line bottom-line-black"></div>
                 </div>
@@ -107,7 +117,15 @@ const Navbar = () => {
                             </span>
                         </div>
                     </button></Link>
-                </div>
+                </div> */}
+                {mobileMode &&
+                    <div id='hamburgerIcon' className="hamburger-icon mr-3">
+                        <span className="line-1"></span>
+                        <span className="line-2"></span>
+                        <span className="line-3"></span>
+                    </div>
+                }
+
             </div>
         </div>
     )
