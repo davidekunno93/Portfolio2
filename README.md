@@ -21,10 +21,11 @@ Currently, two official plugins are available:
 
 AFTER
 navbar option hopper
-phone responsive
+<!-- phone responsive -->
 note that says - works on desktop/phone responsive on icon hover?
 animated background for phone
 tech logos slide left while xp comes out to the right?
-Nav mobile menu
+<!-- Nav mobile menu -->
+prevent hamburger icon from going black on click
 <!-- message box -->
-contact info phone responsive
+<!-- contact info phone responsive -->

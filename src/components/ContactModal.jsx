@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import { Fade, Slide } from 'react-awesome-reveal';
 import { Link } from 'react-router-dom';
+import { DataContext } from '../context/DataProvider';
 
 const ContactModal = ({ open, onClose }) => {
     if (!open) return null
+    const { mobileMode } = useContext(DataContext);
+    const [modalWidth, setModalWidth] = useState(mobileMode ? 300 : 600)
 
     const ButtonMailto = ({ mailto, label }) => {
         return (
@@ -26,14 +29,14 @@ const ContactModal = ({ open, onClose }) => {
                 <Slide direction='up' duration={200} className='w-100 flx' triggerOnce>
 
 
-                        <div className="contact-modal">
+                        <div className="contact-modal" style={{ width: modalWidth }}>
                             <div className="modal-title">
-                                <p className="m-0">Contact Information</p>
+                                <p className={`m-0 ${mobileMode && "medium"}`}>Contact Information</p>
                                 <div onClick={() => onClose()} className="closeBtn-2">
                                     <span className="material-symbols-outlined">close</span>
                                 </div>
                             </div>
-                            <div className="modal-body flx-1 just-se">
+                            <div className={`modal-body ${mobileMode && "small-medium"} flx-1 just-se`}>
                                 <div className="flx-r gap-3">
                                     <img src="https://i.imgur.com/xiXGWUQ.png" alt="" className="img-xxsmall ml-h" />
                                     <p className="m-0 bold700">LinkedIn: </p>
