@@ -83,6 +83,11 @@ const Navbar = () => {
             </Link>
         );
     };
+    useEffect(() => {
+        if (!mobileMode) {
+            setHamburgerMenuOpen(false);
+        }
+    }, [mobileMode])
     return (
         <>
             {/* mobile navbar */}
