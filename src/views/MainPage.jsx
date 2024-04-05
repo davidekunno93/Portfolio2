@@ -476,16 +476,17 @@ const MainPage = () => {
                                 </div>
                                 <p className={`section-text ${mobileMode && "mobile"} bold500`}>
                                     <span className='x-large bold600 dark-text'>Hi, I'm David...</span> <br />
-                                    I found Python in 2022 and the rest is history. I'm a Junior Frontend Developer
-                                    and have exceled very quickly in this field. I have a passion for creating
+                                    I found Python in 2022 and the rest is history. I'm a Junior Developer
+                                    but thanks to consistent habits and real enjoyment for this work I've exceled
+                                    very quickly in this field. I have a passion for creating
                                     logical solutions and software development gives me the opportunity to do just that.</p>
                                 <p className={`section-text ${mobileMode && "mobile"} bold500`}>
                                     I produce smooth and intuitive web applications that optimize for user experience and
                                     functionality. I enjoy creative design but I also excel at re-creating already made designs
-                                    into functional web applications. I thrive in coordinating development with backend
-                                    because I have a lot of experience in backend development.</p>
+                                    into functional web applications. Coordinating development with backend
+                                    comes natural to me because I have a lot of first-hand experience with backend development.</p>
                                 <p className={`section-text ${mobileMode && "mobile"} bold500`}>
-                                    When I'm not coding, I enjoy creating artistic videos, dancing and playing or watching
+                                    P.S. When I'm not coding, I love creating artistic videos, dancing and playing or watching
                                     soccer.
                                 </p>
                                 <div className={`flx ${mobileMode && "just-ce"}`}>
@@ -657,10 +658,12 @@ const MainPage = () => {
                                                             </div>
                                                             :
                                                             <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
-                                                                <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
-                                                                    <div className="material-symbols-outlined">language</div>
-                                                                    <p className="m-0">Website</p>
-                                                                </button></Link>
+                                                                {project.website &&
+                                                                    <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
+                                                                        <div className="material-symbols-outlined">language</div>
+                                                                        <p className="m-0">Website</p>
+                                                                    </button></Link>
+                                                                }
                                                                 <Link target='_blank' to={project.github}><button className="btn-tertiary flx-r gap-2 align-c">
                                                                     <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />
                                                                     <p className="m-0">GitHub</p>
@@ -750,10 +753,12 @@ const MainPage = () => {
                                                             </div>
                                                             :
                                                             <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
+                                                                {project.website &&
                                                                 <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
                                                                     <div className="material-symbols-outlined">language</div>
                                                                     <p className="m-0">Website</p>
                                                                 </button></Link>
+                                                                }
                                                                 <Link target='_blank' to={project.github}><button className="btn-tertiary flx-r gap-2 align-c">
                                                                     <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />
                                                                     <p className="m-0">GitHub</p>
