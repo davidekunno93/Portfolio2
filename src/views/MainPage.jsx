@@ -12,12 +12,19 @@ const MainPage = () => {
     const { refAbout, refSkills, refProjects } = useContext(DataContext);
 
     const scrollToSection = (ref) => {
-        // console.log('scrolling')
-        // console.log(ref)
-        window.scrollTo({
-            top: ref.current.offsetTop,
-            behavior: "smooth"
-        })
+        if (mobileMode && ref === refProjects) {
+            window.scrollTo({
+                top: ref.current.offsetTop - 75,
+                behavior: "smooth"
+            })
+        } else {
+            // console.log('scrolling')
+            // console.log(ref)
+            window.scrollTo({
+                top: ref.current.offsetTop,
+                behavior: "smooth"
+            })
+        }
     }
     // email link code
     const ButtonMailto = ({ mailto, label }) => {
