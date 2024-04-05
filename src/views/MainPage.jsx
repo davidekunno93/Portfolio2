@@ -393,6 +393,7 @@ const MainPage = () => {
                 <Fade delay={100} triggerOnce>
                     <div className="hero-section">
                         <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
+                            {/* <img src="https://i.imgur.com/WN0jsVX.png" alt="" className="img-small img-start end" /> */}
                             <Slide direction={`${mobileMode ? 'down' : 'left'}`} duration={800} className={`${mobileMode ? "flx-c-reverse" : "flx-r flx-1"}`} triggerOnce>
                                 <div className={`${mobileMode ? "bottom-side" : "left-side"} flx-1 flx`}>
                                     <div className="text-composition flx-c gap-5 m-auto">
@@ -405,7 +406,7 @@ const MainPage = () => {
                                             </p>
 
                                             <p className={`m-0 ${mobileMode ? "medium" : "x-large"} my-1`}>Frontend Developer</p>
-                                            <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX familiar with of all sides of development.</p>
+                                            <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX familiar with all sides of development.</p>
                                         </div>
                                         <div className={`flx ${mobileMode && "just-ce"}`}>
                                             <button onClick={() => scrollToSection(refProjects)} className="btn-primary"><p className="m-0">View My Work</p></button>
