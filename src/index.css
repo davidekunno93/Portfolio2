@@ -1721,6 +1721,7 @@ button:focus-visible {
 }
 .mobile-navbar {
   background-color: salmon;
+  background-color: rgb(236, 110, 96);
   height: 100vh;
   width: 200px;
   position: fixed;
