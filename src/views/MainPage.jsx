@@ -295,17 +295,17 @@ const MainPage = () => {
     const mobileEmailInput = useRef(null);
     const mobileMessageInput = useRef(null);
     const mobileMessageSentAnimation = () => {
-        refMobileFormContents.current.classList.add('sent') 
+        refMobileFormContents.current.classList.add('sent')
         wait(500).then(() => {
-            refMobileFormSent.current.classList.remove('hidden-down3-o') 
+            refMobileFormSent.current.classList.remove('hidden-down3-o')
         })
     }
     const resetMobileMessage = () => {
         mobileEmailInput.current.value = ""
         mobileMessageInput.current.value = ""
-        refMobileFormSent.current.classList.add('hidden-down3-o') 
+        refMobileFormSent.current.classList.add('hidden-down3-o')
         wait(500).then(() => {
-            refMobileFormContents.current.classList.remove('sent') 
+            refMobileFormContents.current.classList.remove('sent')
         })
     }
 
@@ -389,50 +389,56 @@ const MainPage = () => {
                     </div>
                 </div> */}
 
-                <div className="hero-section">
 
-                    <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
-                        <div className={`${mobileMode ? "bottom-side" : "left-side"} flx-1 flx`}>
-                            <div className="text-composition flx-c gap-5 m-auto">
-                                <div className={`text-group ${mobileMode && "center-text"} dark-text`}>
+                <Fade delay={100} triggerOnce>
+                    <div className="hero-section">
+                        <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
+                            <Slide direction={`${mobileMode ? 'down' : 'left'}`} duration={800} className={`${mobileMode ? "flx-c-reverse" : "flx-r flx-1"}`} triggerOnce>
+                                <div className={`${mobileMode ? "bottom-side" : "left-side"} flx-1 flx`}>
+                                    <div className="text-composition flx-c gap-5 m-auto">
+                                        <div className={`text-group ${mobileMode && "center-text"} dark-text`}>
 
-                                    <p className={`m-0 ${mobileMode ? "xx-large" : "xxx-large"} bold700`}>Hi, I'm&nbsp;
-                                        <span className="title-box">David
-                                            {/* <div className="spantext-paint"></div> */}
-                                        </span>
-                                    </p>
+                                            <p className={`m-0 ${mobileMode ? "xx-large" : "xxx-large"} bold700`}>Hi, I'm&nbsp;
+                                                <span className="title-box">David
+                                                    {/* <div className="spantext-paint"></div> */}
+                                                </span>
+                                            </p>
 
-                                    <p className={`m-0 ${mobileMode ? "medium" : "x-large"} my-1`}>Frontend Developer</p>
-                                    <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX familiar with of all sides of development.</p>
+                                            <p className={`m-0 ${mobileMode ? "medium" : "x-large"} my-1`}>Frontend Developer</p>
+                                            <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX familiar with of all sides of development.</p>
+                                        </div>
+                                        <div className={`flx ${mobileMode && "just-ce"}`}>
+                                            <button onClick={() => scrollToSection(refProjects)} className="btn-primary"><p className="m-0">View My Work</p></button>
+                                        </div>
+
+                                        <div className={`socials bold600 flx-r ${mobileMode && "just-ce"} gap-8`}>
+                                            <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/'><div className="social-link align-all-items gap-2">
+                                                <img src="https://i.imgur.com/WBpcM53.png" alt="" className="img-xxsmall" />
+                                                <p className="m-0 dark-text">LinkedIn</p>
+                                            </div></Link>
+                                            <Link target='_blank' to='https://github.com/davidekunno93'><div className="social-link align-all-items gap-2">
+                                                <img src="https://i.imgur.com/LahUqrV.png" alt="" className="img-xxsmall" />
+                                                <p className="m-0 dark-text">GitHub</p>
+                                            </div></Link>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div className={`flx ${mobileMode && "just-ce"}`}>
-                                    <button onClick={() => scrollToSection(refProjects)} className="btn-primary"><p className="m-0">View My Work</p></button>
-                                </div>
-
-                                <div className={`socials bold600 flx-r ${mobileMode && "just-ce"} gap-8`}>
-                                    <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/'><div className="social-link align-all-items gap-2">
-                                        <img src="https://i.imgur.com/WBpcM53.png" alt="" className="img-xxsmall" />
-                                        <p className="m-0 dark-text">LinkedIn</p>
-                                    </div></Link>
-                                    <Link target='_blank' to='https://github.com/davidekunno93'><div className="social-link align-all-items gap-2">
-                                        <img src="https://i.imgur.com/LahUqrV.png" alt="" className="img-xxsmall" />
-                                        <p className="m-0 dark-text">GitHub</p>
-                                    </div></Link>
-                                </div>
+                            </Slide>
+                            <div className={`${mobileMode ? "top-side" : "right-side"} flx flx-1`}>
+                                {mobileMode ?
+                                    <img src="https://i.imgur.com/mvsaat6.png" alt="" className="img-fit-80 position-bottom-modified z-1" />
+                                    :
+                                    <Slide direction='right' className={`right-side flx flx-1`} duration={800} triggerOnce>
+                                        <img src="https://i.imgur.com/g0ZSvBo.png" alt="" className="img-fit" />
+                                    </Slide>
+                                }
                             </div>
                         </div>
-                        <div className={`${mobileMode ? "top-side" : "right-side"} flx flx-1`}>
-                            {mobileMode ?
-                                <img src="https://i.imgur.com/mvsaat6.png" alt="" className="img-fit-80 position-bottom-modified" />
-                                :
-                                <img src="https://i.imgur.com/g0ZSvBo.png" alt="" className="img-fit" />
-                            }
-                        </div>
+                        {!mobileMode &&
+                            <Parallax />
+                        }
                     </div>
-                    {!mobileMode &&
-                        <Parallax />
-                    }
-                </div>
+                </Fade>
 
                 <div ref={refAbout} onMouseEnter={() => addCursorStyle()} onMouseLeave={() => removeCursorStyle()} className={`about-me-section`}>
 

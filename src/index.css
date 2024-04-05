@@ -1894,12 +1894,16 @@ p {
   left: 0;
   z-index: 4;
 }
-.hero-section .left-side,
+
 .hero-section .right-side,
 .hero-section .top-side,
 .hero-section .bottom-side {
   padding: 2% 5% 0% 5%;
 }
+.hero-section .left-side {
+  padding: 2% 5% 0% 10%;
+}
+
 .parallax-complex {
   width: 100%;
   position: relative;
