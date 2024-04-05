@@ -583,7 +583,7 @@ const MainPage = () => {
                                                                 {project.logoUrl &&
                                                                     <img src={project.logoUrl} alt="" className="img-xxsmall" />
                                                                 }
-                                                                <p className="m-0 large">{project.title}</p>
+                                                                <p className="m-0 large ws-normal">{project.title}</p>
                                                             </div>
                                                             <div className={`window-container ${mobileMode && "mobile"}`}>
                                                                 <div className={mobileMode ? "card-window" : even ? "card-window-r" : "card-window-l"}>

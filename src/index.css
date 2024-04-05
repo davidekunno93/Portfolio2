@@ -1198,6 +1198,7 @@ button:focus-visible {
   width: 100%;
 }
 
+
 .h-100 {
   height: 100%;
 }
@@ -1647,6 +1648,9 @@ button:focus-visible {
 }
 .dot-unselected:hover {
   filter: brightness(50%);
+}
+.ws-normal {
+  white-space: normal;
 }
 
 /* hamburger icon */
