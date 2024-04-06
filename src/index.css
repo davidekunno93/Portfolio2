@@ -1781,7 +1781,7 @@ button:focus-visible {
   width: 0%;
   /* background-color: black; */
   /* bottom: 0 */
-  opacity: 0;
+  /* opacity: 0; */
   left: 50%;
   transform: translate(-50%, 4px);
   transition: 0.2s;
@@ -1791,13 +1791,34 @@ button:focus-visible {
   opacity: 1;
   transition: 0.3s;
 }
-.option .bottom-line-black {
-  background-color: black;
-}
-
 .option .bottom-line-white {
   background-color: white;
 }
+.option .bottom-line-black, .weblink .bottom-line-black {
+  background-color: black;
+}
+.weblink {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+.weblink .bottom-line {
+  position: absolute;
+  height: 2.5px;
+  width: 0%;
+  /* background-color: black; */
+  /* bottom: 0 */
+  /* opacity: 0; */
+  left: 50%;
+  transform: translate(-50%, 28px);
+  transition: 0.2s;
+}
+.weblink:hover .bottom-line {
+  width: 100%;
+  opacity: 1;
+  transition: 0.3s;
+}
+
 
 .navbar-contact-links {
   transform: translateX(75%);

@@ -22,13 +22,13 @@ Currently, two official plugins are available:
 AFTER
 navbar option hopper
 <!-- phone responsive -->
-note that says - works on desktop/phone responsive on icon hover?
+?note that says - works on desktop/phone responsive on icon hover?
 animated background for phone
-tech logos slide left while xp comes out to the right?
+?tech logos slide left while xp comes out to the right?
 <!-- Nav mobile menu -->
 <!-- prevent hamburger icon from going black on click -->
 Website GitHub hover anim for desktop
-remove custom cursor in mobile mode
+<!-- remove custom cursor in mobile mode -->
 Swipe projects left and right
 <!-- message box -->
 <!-- contact info phone responsive -->

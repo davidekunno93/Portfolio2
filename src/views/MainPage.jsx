@@ -358,35 +358,6 @@ const MainPage = () => {
             <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
             <div className="page-container">
 
-                {/* <div className="hero-section">
-                    <div className="left-side flx-1 flx">
-                        <div className="text-composition flx-c gap-5 m-auto">
-                            <div className="text-group dark-text">
-                                <p className="m-0 xxx-large bold700">Hi, I'm David</p>
-                                <p className="m-0 x-large my-1">Frontend Developer</p>
-                                <p className="m-0 bold600">Experienced <span className="purple-text">Frontend React Developer</span> based in Houston, TX. I have a good understanding of all sides of development.</p>
-                            </div>
-                            <div className="flx">
-                                <button onClick={() => scrollToSection(refProjects)} className="btn-primary"><p className="m-0">View My Work</p></button>
-                            </div>
-
-                            <div className="socials bold600 flx-r gap-8">
-                                <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/'><div className="social-link align-all-items gap-2">
-                                    <img src="https://i.imgur.com/WBpcM53.png" alt="" className="img-xxsmall" />
-                                    <p className="m-0 dark-text">LinkedIn</p>
-                                </div></Link>
-                                <Link target='_blank' to='https://github.com/davidekunno93'><div className="social-link align-all-items gap-2">
-                                    <img src="https://i.imgur.com/LahUqrV.png" alt="" className="img-xxsmall" />
-                                    <p className="m-0 dark-text">GitHub</p>
-                                </div></Link>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="right-side flx-1"> 
-                        <img src="https://i.imgur.com/g0ZSvBo.png" alt="" className="img-fit" />
-                    </div>
-                </div> */}
-
 
                 <Fade delay={100} triggerOnce>
                     <div className="hero-section">
@@ -438,6 +409,7 @@ const MainPage = () => {
                         }
                     </div>
                 </Fade>
+
 
                 <div ref={refAbout} onMouseEnter={() => addCursorStyle()} onMouseLeave={() => removeCursorStyle()} className={`about-me-section`}>
 
@@ -601,6 +573,7 @@ const MainPage = () => {
                                         let even = (index + 1) % 2 === 0
                                         if (index < 3) {
                                             return <div key={index} className={`project-card ${mobileMode ? "flx-c align-c" : even ? "flx-r-reverse" : "flx-r"}`}>
+                                                {/* project card image (1) */}
                                                 <div className="w-50 flx just-ce">
                                                     {project.website ?
                                                         <Link target='_blank' to={project.website}><div className="window-container-outer pointer">
@@ -635,6 +608,7 @@ const MainPage = () => {
                                                         </div>
                                                     }
                                                 </div>
+                                                {/* project card text (1) */}
                                                 <div className={`card-text ${mobileMode && "mobile"}`}>
                                                     <p className="m-0 title">{project.title}</p>
                                                     <p className="text-body">{project.desc}</p>
@@ -656,15 +630,21 @@ const MainPage = () => {
                                                         {!mobileMode ?
                                                             <div className="weblinks flx-r gap-12 bold600 just-ce my-4">
                                                                 {project.website &&
-                                                                    <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
-                                                                        <span className="material-symbols-outlined">language</span>
-                                                                        <p className="m-0">Website</p>
-                                                                    </div></Link>
+                                                                    <div className="weblink">
+                                                                        <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
+                                                                            <span className="material-symbols-outlined">language</span>
+                                                                            <p className="m-0">Website</p>
+                                                                        </div></Link>
+                                                                        <div className="bottom-line bottom-line-black"></div>
+                                                                    </div>
                                                                 }
-                                                                <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
-                                                                    <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
-                                                                    <p className="m-0">GitHub</p>
-                                                                </div></Link>
+                                                                <div className="weblink">
+                                                                    <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
+                                                                        <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
+                                                                        <p className="m-0">GitHub</p>
+                                                                    </div></Link>
+                                                                    <div className="bottom-line bottom-line-black"></div>
+                                                                </div>
                                                             </div>
                                                             :
                                                             <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
@@ -696,6 +676,7 @@ const MainPage = () => {
                                         let even = (index + 1) % 2 === 0
                                         if (index >= 3 && index < 6) {
                                             return <div key={index} className={`project-card ${mobileMode ? "flx-c align-c" : !even ? "flx-r-reverse" : "flx-r"}`}>
+                                                {/* project card image (2) */}
                                                 <div className="w-50 flx just-ce">
                                                     {project.website ?
                                                         <Link target='_blank' to={project.website}><div className="window-container-outer pointer">
@@ -730,6 +711,7 @@ const MainPage = () => {
                                                         </div>
                                                     }
                                                 </div>
+                                                {/* project card text (2) */}
                                                 <div className={`card-text ${mobileMode && "mobile"}`}>
                                                     <p className="title">{project.title}</p>
                                                     <p className="text-body">{project.desc}</p>
@@ -751,15 +733,21 @@ const MainPage = () => {
                                                         {!mobileMode ?
                                                             <div className="weblinks flx-r gap-12 bold600 just-ce my-4">
                                                                 {project.website &&
-                                                                    <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
-                                                                        <span className="material-symbols-outlined">language</span>
-                                                                        <p className="m-0">Website</p>
-                                                                    </div></Link>
+                                                                    <div className="weblink">
+                                                                        <Link target='_blank' to={project.website} ><div className="website align-all-items gap-2 black-text">
+                                                                            <span className="material-symbols-outlined">language</span>
+                                                                            <p className="m-0">Website</p>
+                                                                        </div></Link>
+                                                                        <div className="bottom-line bottom-line-black"></div>
+                                                                    </div>
                                                                 }
-                                                                <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
-                                                                    <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
-                                                                    <p className="m-0">GitHub</p>
-                                                                </div></Link>
+                                                                <div className="weblink">
+                                                                    <Link target='_blank' to={project.github}><div className="github align-all-items gap-2 black-text">
+                                                                        <img src={techImgs[techIndex.GitHub].logo} alt="" className="img-xxsmall" />
+                                                                        <p className="m-0">GitHub</p>
+                                                                    </div></Link>
+                                                                    <div className="bottom-line bottom-line-black"></div>
+                                                                </div>
                                                             </div>
                                                             :
                                                             <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
