@@ -9,7 +9,7 @@ const DataProvider = (props) => {
     const refProjects = useRef(null);
 
     const handleResize = () => {
-        if (document.body.clientWidth < 800) {
+        if (document.body.clientWidth < 1024) {
             setMobileMode(true)
             console.log('Mobile Mode: On')
         } else {

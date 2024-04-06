@@ -32,9 +32,7 @@ const Navbar = () => {
             //     hamburger.classList.replace('black', 'white')
             // }
         } else {
-            if (solidNavbar) {
-                setSolidNavbar(false);
-            }
+            setSolidNavbar(false);
             // navbar.classList.remove('black-bg')
             // links.classList.remove('show-links')
             // if (resumeBtn) {

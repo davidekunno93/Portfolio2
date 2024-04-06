@@ -293,6 +293,12 @@ button:focus-visible {
   height: 80%;
   object-fit: contain;
 }
+@media only screen and (min-width:460px) {
+  .img-fit-80 {
+    width: 332px;
+    object-fit: contain;
+  }
+}
 
 
 .img-fitWidth {
