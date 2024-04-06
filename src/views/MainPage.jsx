@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import ContactModal from '../components/ContactModal'
 import { DataContext } from '../context/DataProvider'
@@ -200,9 +200,104 @@ const MainPage = () => {
             github: "https://github.com/davidekunno93/Flask_Pokemon_Project.git",
         },
     ]
+ 
     const [projectIndex, setProjectIndex] = useState(0);
+    const incrementProjectIndex = () => {
+        if (projectIndex < projectPages.slice(-1)) {
+            setProjectIndex(projectIndex + 1)
+        } else {
+            sustainProjectIndex()
+        }
+    }
+    const decrementProjectIndex = () => {
+        if (projectIndex > 0) {
+            setProjectIndex(projectIndex - 1)
+        } else {
+            sustainProjectIndex()
+        }
+    }
+    const sustainProjectIndex = () => {
+        setProjectIndex(projectIndex)
+        projectInner.current.style.transform = `translateX(-${projectIndex*100}%)`
+        console.log('sustain:', projectIndex)
+    }
     const projectPages = [0, 1]
     const [indicatorsVisible, setIndicatorsVisible] = useState(false);
+
+    const projectInner = useRef(null);
+    const projectPage = useRef(null);
+    const [isDown, setIsDown] = useState(false);
+    // const [startX, setStartX] = useState(null);
+    let start = null
+    let deltaX = null
+    const touchStarted = (e) => {
+        if (projectInner.current.contains(e.target)) {
+            start = e.changedTouches[0].pageX
+            let startX = e.changedTouches[0].pageX
+            // console.log(e.changedTouches[0].pageX);
+            projectInner.current.style.transitionTimingFunction = 'linear'
+            // console.log("width: "+projectPage.current.offsetWidth)
+            window.addEventListener('touchmove', (e) => trackMouse(e, startX))
+        }
+    }
+
+    // useEffect(() => {
+    //     window.addEventListener('touchstart', (e) => {
+    //         if (projectInner.current.contains(e.target)) {
+    //             start = e.changedTouches[0].pageX
+    //             let startX = e.changedTouches[0].pageX
+    //             // console.log(e.changedTouches[0].pageX);
+    //             projectInner.current.style.transitionTimingFunction = 'linear'
+    //             // console.log("width: "+projectPage.current.offsetWidth)
+    //             window.addEventListener('touchmove', (e) => trackMouse(e, startX))
+    //             setIsDown(!isDown)
+    //         }
+    //     })
+    //     // window.addEventListener('touchend', (e) => {touchended(e)})
+    // }, [])
+    // useEffect(() => {
+    //     window.addEventListener('touchend', (e) => {touchEnded(e)})
+    //     return window.removeEventListener('touchend', touchended)
+    // }, [isDown])
+    const printI = () => {
+        console.log("currI = "+projectIndex)
+    }
+    const touchEnded = (e) => {
+        if (projectInner.current.contains(e.target)) {
+            // window.removeEventListener('touchmove', trackMouse)
+            console.log('touch ended')
+            if ((-deltaX) > 0.2 * projectPage.current.offsetWidth) {
+                incrementProjectIndex()
+                console.log('increment')
+            } else if (deltaX > 0.2 * projectPage.current.offsetWidth) {
+                decrementProjectIndex()
+                console.log('decrement')
+            } else {
+                sustainProjectIndex()
+                // projectInner.current.style.transform = `translateX(-${projectIndex * 100}%)`
+                // console.log("curr index: "+projectIndex)
+                console.log('else block')
+            }
+            deltaX = null
+            projectInner.current.style.transitionTimingFunction = 'ease'
+            // projectInner.current.style.transform = `translateX(-${newIndex*100}%)`
+        }
+    }
+    const [swipe, setSwipe] = useState(null);
+    const trackMouse = (e, startX) => {
+        // e.preventDefault()
+        if (projectInner.current.contains(e.target)) {
+            // console.log(e.changedTouches[0].pageX - startX)
+            deltaX = e.changedTouches[0].pageX - startX
+            let currentProjectIndex = projectIndex
+            projectInner.current.style.transform = `translateX(calc(-${currentProjectIndex * 100}% + ${1.2 * deltaX}px))`
+            // if (deltaX < 0 && (-deltaX) > 0.1*projectPage.current.offsetWidth) {
+            //     console.log('slide')
+            //     // setProjectIndex(1)
+            // }
+        }
+
+    }
 
 
     // customize cursor code
@@ -549,7 +644,7 @@ const MainPage = () => {
 
                 <div ref={refProjects} className={`flx ${mobileMode ? "just-ce mb-8" : "ml-6 py-8"}`}>
                     <div className="title-box">
-                        <p className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
+                        <p onClick={() => {printI(); sustainProjectIndex()}} className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
                         <div className={`title-paint`}></div>
                     </div>
 
@@ -562,13 +657,13 @@ const MainPage = () => {
                         })}
                     </div>
                 }
-                <div className="projects-section my-8">
+                <div onTouchStart={touchStarted} onTouchMove={trackMouse} onTouchEnd={touchEnded} className="projects-section my-8">
 
                     <div className="carousel-window">
-                        <div className="inner" style={{ transform: `translateX(-${projectIndex * 100}%)` }}>
+                        <div ref={projectInner} className="inner" style={{ transform: `translateX(calc(-${projectIndex * 100}% - ${swipe ? swipe : "0"}px  ))` }}>
                             <div className="carousel-item">
 
-                                <div className={`project-page flx-c ${mobileMode && "pt-4"}`}>
+                                <div ref={projectPage} className={`project-page flx-c ${mobileMode && "pt-4"}`}>
                                     {projects.map((project, index) => {
                                         let even = (index + 1) % 2 === 0
                                         if (index < 3) {

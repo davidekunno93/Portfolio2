@@ -22,7 +22,7 @@ Currently, two official plugins are available:
 AFTER
 navbar option hopper
 <!-- phone responsive -->
-?note that says - works on desktop/phone responsive on icon hover?
+<!-- ?note that says - works on desktop/phone responsive on icon hover? -->
 animated background for phone
 ?tech logos slide left while xp comes out to the right?
 <!-- Nav mobile menu -->

@@ -1651,7 +1651,10 @@ button:focus-visible {
 .inner {
   white-space: nowrap;
   transition-duration: 0.6s;
+  transition-timing-function: ease;
+  /* transition-duration: 0.6s; */
   /* border: 2px solid blueviolet; */
+  /* transform: translateX(calc(-10% + 18px)); */
 }
 .carousel-item {
   /* border: 1px solid pink; */
