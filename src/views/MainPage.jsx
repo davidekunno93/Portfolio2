@@ -205,11 +205,10 @@ const MainPage = () => {
     const [indicatorsVisible, setIndicatorsVisible] = useState(false);
 
 
-
+    // customize cursor code
     const addCursorStyle = () => {
         window.addEventListener("mousemove", styleCursor)
     }
-
     const styleCursor = (e) => {
         const cursorDot = document.querySelector("[data-cursor-dot]")
         const cursorOutline = document.querySelector("[data-cursor-outline]")
@@ -238,20 +237,15 @@ const MainPage = () => {
         cursorDot.classList.add('hidden-o')
         cursorOutline.classList.add('hidden-o')
     }
-
     const removeCursorStyle = () => {
         window.removeEventListener("mousemove", styleCursor)
         hideCursorStyle()
     }
     useEffect(() => {
-        hideCursorStyle()
-    }, [])
-    useEffect(() => {
-        if (mobileMode) {
-            removeCursorStyle()
-        } else if (!mobileMode) {
+        if (!mobileMode) {
+            hideCursorStyle()
         }
-    }, [mobileMode])
+    }, [])
 
 
     // bubble message email code
@@ -447,8 +441,12 @@ const MainPage = () => {
 
                 <div ref={refAbout} onMouseEnter={() => addCursorStyle()} onMouseLeave={() => removeCursorStyle()} className={`about-me-section`}>
 
-                    <div className="cursor-dot" data-cursor-dot></div>
-                    <div className="cursor-outline" data-cursor-outline></div>
+                    {!mobileMode &&
+                        <>
+                            <div className="cursor-dot" data-cursor-dot></div>
+                            <div className="cursor-outline" data-cursor-outline></div>
+                        </>
+                    }
 
                     <Fade fraction={mobileMode ? 0.5 : 0.75} triggerOnce className='about-me-section'>
                         <div className={`${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
@@ -584,6 +582,14 @@ const MainPage = () => {
                     </div>
 
                 </div>
+
+                {indicatorsVisible &&
+                    <div className="dot-indicators just-ce mb-4">
+                        {projectPages.map((page, index) => {
+                            return <div key={index} onClick={() => setProjectIndex(index)} className={`${index === projectIndex ? "dot-selected" : "dot-unselected"}`}></div>
+                        })}
+                    </div>
+                }
                 <div className="projects-section my-8">
 
                     <div className="carousel-window">
@@ -758,10 +764,10 @@ const MainPage = () => {
                                                             :
                                                             <div className="weblinks flx-r gap-10 bold600 just-ce mt-4 mb-8">
                                                                 {project.website &&
-                                                                <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
-                                                                    <div className="material-symbols-outlined">language</div>
-                                                                    <p className="m-0">Website</p>
-                                                                </button></Link>
+                                                                    <Link target='_blank' to={project.website} ><button className="btn-tertiary flx-r gap-2 align-c">
+                                                                        <div className="material-symbols-outlined">language</div>
+                                                                        <p className="m-0">Website</p>
+                                                                    </button></Link>
                                                                 }
                                                                 <Link target='_blank' to={project.github}><button className="btn-tertiary flx-r gap-2 align-c">
                                                                     <img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" />
@@ -783,7 +789,7 @@ const MainPage = () => {
                     </div>
 
                 </div>
-                <div className={`view-more flx-r my-4 ${mobileMode ? "just-ce" : "ml-8"}`}>
+                <div className={`view-more flx-r my-4 just-ce`}>
                     {indicatorsVisible ?
                         <div className="dot-indicators just-ce">
                             {projectPages.map((page, index) => {
@@ -796,7 +802,7 @@ const MainPage = () => {
                 </div>
 
                 <div className="footer-section position-relative mt-12">
-                    <p className={`m-0 mt-8 ${mobileMode ? "section-subtitle center-text d-none" : "section-title"}`}>Send me a message</p>
+                    <p className={`m-0 ${mobileMode && "d-none"} section-title`}>Send me a message</p>
                     <div className={`profile-card ${mobileMode && "mobile"} mt-5`}>
                         <div className={`profile-card-imgDiv ${mobileMode && "mobile"}`}>
                             <img src="https://i.imgur.com/3BwhEn7.jpg" alt="" className={`profile-card-img ${mobileMode && "mobile"}`} />
@@ -818,7 +824,7 @@ const MainPage = () => {
                             </div>
                         </div>
                     </div>
-                    <p className={`m-0 my-8 ${mobileMode ? "section-subtitle center-text" : "section-title d-none"}`}>Send me a message</p>
+                    <p className={`m-0 section-subtitle center-text ${!mobileMode && "d-none"}`}>Send me a message</p>
 
                     <div className={`message-bubble ${mobileMode && "d-none"} flx-c just-ce`}>
                         <Fade fraction={0.8} delay={200} triggerOnce>

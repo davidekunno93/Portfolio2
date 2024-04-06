@@ -2205,6 +2205,9 @@ p {
   height: 400px;
   position: relative;
   background-color: rgb(240, 240, 240);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 .footer {
   width: 100%;
