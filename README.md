@@ -29,6 +29,6 @@ animated background for phone
 <!-- prevent hamburger icon from going black on click -->
 <!-- Website GitHub hover anim for desktop -->
 <!-- remove custom cursor in mobile mode -->
-Swipe projects left and right
+<!-- Swipe projects left and right -->
 <!-- message box -->
 <!-- contact info phone responsive -->

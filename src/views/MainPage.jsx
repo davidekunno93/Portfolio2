@@ -290,7 +290,7 @@ const MainPage = () => {
             // console.log(e.changedTouches[0].pageX - startX)
             deltaX = e.changedTouches[0].pageX - startX
             let currentProjectIndex = projectIndex
-            projectInner.current.style.transform = `translateX(calc(-${currentProjectIndex * 100}% + ${1.2 * deltaX}px))`
+            // projectInner.current.style.transform = `translateX(calc(-${currentProjectIndex * 100}% + ${1.2 * deltaX}px))`
             // if (deltaX < 0 && (-deltaX) > 0.1*projectPage.current.offsetWidth) {
             //     console.log('slide')
             //     // setProjectIndex(1)
