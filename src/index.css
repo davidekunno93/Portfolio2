@@ -1249,6 +1249,9 @@ button:focus-visible {
 .white-bg {
   background-color: white;
 }
+.gains-bg {
+  background-color: gainsboro;
+}
 
 .five {
   background-color: antiquewhite;
@@ -1954,6 +1957,7 @@ p {
   top: 0;
   left: 0;
   z-index: 4;
+  overflow: hidden;
 }
 
 .hero-section .right-side,
@@ -2506,10 +2510,11 @@ p {
   position: absolute;
   left: 0%;
   top: 50%;
-  transition: 8s linear;
+  transition-duration: 6s;
+  transition-timing-function: linear;
   transform: translate(-50px, 0px);
 }
 .img-start.end {
   left: 85%;
-  transform: translate(50px, -50px);
+  transform: translate(150px, -50px);
 }

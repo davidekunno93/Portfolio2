@@ -200,7 +200,7 @@ const MainPage = () => {
             github: "https://github.com/davidekunno93/Flask_Pokemon_Project.git",
         },
     ]
- 
+
     const [projectIndex, setProjectIndex] = useState(0);
     const incrementProjectIndex = () => {
         if (projectIndex < projectPages.slice(-1)) {
@@ -218,7 +218,7 @@ const MainPage = () => {
     }
     const sustainProjectIndex = () => {
         setProjectIndex(projectIndex)
-        projectInner.current.style.transform = `translateX(-${projectIndex*100}%)`
+        projectInner.current.style.transform = `translateX(-${projectIndex * 100}%)`
         console.log('sustain:', projectIndex)
     }
     const projectPages = [0, 1]
@@ -260,7 +260,7 @@ const MainPage = () => {
     //     return window.removeEventListener('touchend', touchended)
     // }, [isDown])
     const printI = () => {
-        console.log("currI = "+projectIndex)
+        console.log("currI = " + projectIndex)
     }
     const touchEnded = (e) => {
         if (projectInner.current.contains(e.target)) {
@@ -448,6 +448,26 @@ const MainPage = () => {
         console.log("Mobile Mode: " + mobileMode)
     }, [])
 
+    useEffect(() => {
+        flyIcon()
+    }, [mobileMode])
+    const flyIcon = () => {
+        if (mobileMode) {
+            const icon = document.getElementById('flyingIcon')
+            icon.classList.add('end')
+            wait(7000).then(() => {
+                icon.style.transitionDuration = '0s'
+                icon.classList.remove('end')
+                wait(1000).then(() => {
+                    icon.style.transitionDuration = '6s'
+                    wait(1000).then(() => {
+                        flyIcon()
+                    })
+                })
+            })
+        }
+    }
+
     return (
         <>
             <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
@@ -457,7 +477,9 @@ const MainPage = () => {
                 <Fade delay={100} triggerOnce>
                     <div className="hero-section">
                         <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
-                            {/* <img src="https://i.imgur.com/WN0jsVX.png" alt="" className="img-small img-start end" /> */}
+                            {mobileMode &&
+                                <img id='flyingIcon' src="https://i.imgur.com/ULgwPsr.png" alt="" className="img-small img-start" />
+                            }
                             <Slide direction={`${mobileMode ? 'down' : 'left'}`} duration={800} className={`${mobileMode ? "flx-c-reverse" : "flx-r flx-1"}`} triggerOnce>
                                 <div className={`${mobileMode ? "bottom-side" : "left-side"} flx-1 flx`}>
                                     <div className="text-composition flx-c gap-5 m-auto">
@@ -644,7 +666,7 @@ const MainPage = () => {
 
                 <div ref={refProjects} className={`flx ${mobileMode ? "just-ce mb-8" : "ml-6 py-8"}`}>
                     <div className="title-box">
-                        <p onClick={() => {printI(); sustainProjectIndex()}} className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
+                        <p onClick={() => { printI(); sustainProjectIndex() }} className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
                         <div className={`title-paint`}></div>
                     </div>
 
