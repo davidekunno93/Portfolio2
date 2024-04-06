@@ -246,6 +246,12 @@ const MainPage = () => {
     useEffect(() => {
         hideCursorStyle()
     }, [])
+    useEffect(() => {
+        if (mobileMode) {
+            removeCursorStyle()
+        } else if (!mobileMode) {
+        }
+    }, [mobileMode])
 
 
     // bubble message email code
@@ -777,7 +783,7 @@ const MainPage = () => {
                     </div>
 
                 </div>
-                <div className="view-more flx-r my-4 ml-8">
+                <div className={`view-more flx-r my-4 ${mobileMode ? "just-ce" : "ml-8"}`}>
                     {indicatorsVisible ?
                         <div className="dot-indicators just-ce">
                             {projectPages.map((page, index) => {
@@ -785,12 +791,12 @@ const MainPage = () => {
                             })}
                         </div>
                         :
-                        <button onClick={() => { setProjectIndex(1); setIndicatorsVisible(true) }} className="btn-primary">View More</button>
+                        <button onClick={() => { setProjectIndex(1); setIndicatorsVisible(true); scrollToSection(refProjects) }} className="btn-primary">View More</button>
                     }
                 </div>
 
                 <div className="footer-section position-relative mt-12">
-                    <p className={`m-0 mt-8 ${mobileMode ? "section-subtitle center-text" : "section-title"}`}>Send me a message</p>
+                    <p className={`m-0 mt-8 ${mobileMode ? "section-subtitle center-text d-none" : "section-title"}`}>Send me a message</p>
                     <div className={`profile-card ${mobileMode && "mobile"} mt-5`}>
                         <div className={`profile-card-imgDiv ${mobileMode && "mobile"}`}>
                             <img src="https://i.imgur.com/3BwhEn7.jpg" alt="" className={`profile-card-img ${mobileMode && "mobile"}`} />
@@ -812,6 +818,8 @@ const MainPage = () => {
                             </div>
                         </div>
                     </div>
+                    <p className={`m-0 my-8 ${mobileMode ? "section-subtitle center-text" : "section-title d-none"}`}>Send me a message</p>
+
                     <div className={`message-bubble ${mobileMode && "d-none"} flx-c just-ce`}>
                         <Fade fraction={0.8} delay={200} triggerOnce>
                             <Slide fraction={0.8} direction='up' triggerOnce>
@@ -867,7 +875,7 @@ const MainPage = () => {
 
                                 <div className="align-all-items gap-2 just-ce white-text">
                                     <span className="material-symbols-outlined">mail</span>
-                                    <p onClick={() => mobileMessageSentAnimation()} className="m-0">matramere@gmail.com</p>
+                                    <p className="m-0">matramere@gmail.com</p>
                                 </div>
 
                                 <input ref={mobileEmailInput} id='mobileEmail' type="text" name='user_email' className="input-style center w-100 font-jakarta" placeholder='Your Email' autoComplete='off' />

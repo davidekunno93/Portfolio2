@@ -28,5 +28,6 @@ tech logos slide left while xp comes out to the right?
 <!-- Nav mobile menu -->
 prevent hamburger icon from going black on click
 Website GitHub hover anim for desktop
+Swipe projects left and right
 <!-- message box -->
 <!-- contact info phone responsive -->
