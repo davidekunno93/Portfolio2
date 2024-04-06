@@ -27,7 +27,7 @@ animated background for phone
 ?tech logos slide left while xp comes out to the right?
 <!-- Nav mobile menu -->
 <!-- prevent hamburger icon from going black on click -->
-Website GitHub hover anim for desktop
+<!-- Website GitHub hover anim for desktop -->
 <!-- remove custom cursor in mobile mode -->
 Swipe projects left and right
 <!-- message box -->

@@ -613,9 +613,15 @@ const MainPage = () => {
                                                     <p className="m-0 title">{project.title}</p>
                                                     <p className="text-body">{project.desc}</p>
                                                     <div className={`desktop-phone flx-r just-ce gap-4 ${mobileMode && "mb-4"}`}>
-                                                        <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />
+                                                        <div className="img-container">
+                                                            <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />
+                                                            <div className="img-tooltip">{!project.responsive ? "Desktop only" : "Works on Desktop"}</div>
+                                                        </div>
                                                         {project.responsive &&
-                                                            <img src="https://i.imgur.com/n96bwGO.png" alt="" className="img-xxsmall-h" />
+                                                            <div className="img-container">
+                                                                <img src="https://i.imgur.com/n96bwGO.png" alt="" className="img-xxsmall-h" />
+                                                                <div className="img-tooltip">Phone responsive</div>
+                                                            </div>
                                                         }
                                                     </div>
                                                     <div className="text-footer">
@@ -716,9 +722,15 @@ const MainPage = () => {
                                                     <p className="title">{project.title}</p>
                                                     <p className="text-body">{project.desc}</p>
                                                     <div className={`desktop-phone flx-r just-ce gap-4 ${mobileMode && "mb-4"}`}>
-                                                        <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />
+                                                        <div className="img-container">
+                                                            <img src="https://i.imgur.com/0PAMDas.png" alt="" className="img-xxsmall-h" />
+                                                            <div className="img-tooltip">{!project.responsive ? "Desktop only" : "Works on Desktop"}</div>
+                                                        </div>
                                                         {project.responsive &&
-                                                            <img src="https://i.imgur.com/n96bwGO.png" alt="" className="img-xxsmall-h" />
+                                                            <div className="img-container">
+                                                                <img src="https://i.imgur.com/n96bwGO.png" alt="" className="img-xxsmall-h" />
+                                                                <div className="img-tooltip">Phone responsive</div>
+                                                            </div>
                                                         }
                                                     </div>
                                                     <div className="text-footer">
