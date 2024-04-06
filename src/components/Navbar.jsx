@@ -8,40 +8,43 @@ const Navbar = () => {
     const { mobileMode } = useContext(DataContext);
     const hamburgerMenu = useRef(null);
     const [hamburgerMenuOpen, setHamburgerMenuOpen] = useState(false);
+    const [solidNavbar, setSolidNavbar] = useState(false);
     const listenScrollEvent = (e) => {
         let navbar = document.getElementById('navbar')
         let hamburger = document.getElementById('hamburgerIcon')
         let links = document.getElementById('navbarContactLinks')
         let resumeBtn = document.getElementById('resumeBtn')
         let bottomLines = document.querySelectorAll('.bottom-line')
-        // console.log(bottomLines)
-        // let navOptions = document.getElementById('navOptions')
 
         if (window.scrollY > window.innerHeight * 0.9) {
-            navbar.classList.add('black-bg')
-            links.classList.add('show-links')
-            if (resumeBtn) {
-                resumeBtn.classList.replace('resume-primary', 'resume-secondary')
-                for (let i = 0; i < bottomLines.length; i++) {
-                    // console.log(bottomLines[i])
-                    bottomLines[i].classList.replace('bottom-line-black', 'bottom-line-white')
-                }
-            } else {
-                hamburger.classList.replace('black', 'white')
+            if (!solidNavbar) {
+                setSolidNavbar(true);
             }
-            // navOptions.classList.remove('bold600')
+            // navbar.classList.add('black-bg')
+            // links.classList.add('show-links')
+            // if (resumeBtn) {
+            //     resumeBtn.classList.replace('resume-primary', 'resume-secondary')
+            //     for (let i = 0; i < bottomLines.length; i++) {
+            //         // console.log(bottomLines[i])
+            //         bottomLines[i].classList.replace('bottom-line-black', 'bottom-line-white')
+            //     }
+            // } else {
+            //     hamburger.classList.replace('black', 'white')
+            // }
         } else {
-            navbar.classList.remove('black-bg')
-            links.classList.remove('show-links')
-            if (resumeBtn) {
-                resumeBtn.classList.replace('resume-secondary', 'resume-primary')
-                for (let i = 0; i < bottomLines.length; i++) {
-                    bottomLines[i].classList.replace('bottom-line-white', 'bottom-line-black')
-                }
-            } else {
-                hamburger.classList.replace('white', 'black')
+            if (solidNavbar) {
+                setSolidNavbar(false);
             }
-            // navOptions.classList.add('bold600')
+            // navbar.classList.remove('black-bg')
+            // links.classList.remove('show-links')
+            // if (resumeBtn) {
+            //     resumeBtn.classList.replace('resume-secondary', 'resume-primary')
+            //     for (let i = 0; i < bottomLines.length; i++) {
+            //         bottomLines[i].classList.replace('bottom-line-white', 'bottom-line-black')
+            //     }
+            // } else {
+            //     hamburger.classList.replace('white', 'black')
+            // }
         }
     }
     useEffect(() => {
@@ -61,12 +64,14 @@ const Navbar = () => {
                 behavior: "smooth"
             })
         }
+        setHamburgerMenuOpen(false);
     }
     const scrollToTop = () => {
         window.scrollTo({
             top: [0, 0],
             behavior: 'smooth'
         })
+        setHamburgerMenuOpen(false);
     }
 
     const ButtonMailto = ({ mailto, label }) => {
@@ -125,10 +130,10 @@ const Navbar = () => {
             </div>
 
             {/* desktop navbar */}
-            <div id='navbar' className={`navbar ${mobileMode && "mobile"}`}>
+            <div id='navbar' className={`navbar ${mobileMode && "mobile"} ${solidNavbar && "black-bg"}`}>
                 <div className="navbar-logo position-relative">
                     <p className="m-0">@davidekunno</p>
-                    <div id='navbarContactLinks' className="navbar-contact-links position-absolute align-all-items gap-4">
+                    <div id='navbarContactLinks' className={`navbar-contact-links position-absolute align-all-items gap-4 ${solidNavbar && "show-links"}`}>
                         <Link target='_blank' to='https://www.linkedin.com/in/david-ekunno-794619a3/'><img src="https://i.imgur.com/14o2J4P.png" alt="" className="img-xxsmall" /></Link>
                         <Link target='_blank' to='https://github.com/davidekunno93/'><img src="https://i.imgur.com/A3c3kUB.png" alt="" className="img-xxsmall" /></Link>
                         {/* <Link><span className="material-symbols-outlined white-text">mail</span></Link> */}
@@ -141,26 +146,26 @@ const Navbar = () => {
 
                         <div onClick={() => scrollToTop()} className="option">
                             <p className="m-0">Home</p>
-                            <div className="bottom-line bottom-line-black"></div>
+                            <div className={`bottom-line ${solidNavbar ? "bottom-line-white" : "bottom-line-black"}`}></div>
                         </div>
                         <div onClick={() => scrollToSection(refAbout)} className="option">
                             <p className="m-0">About</p>
-                            <div className="bottom-line bottom-line-black"></div>
+                            <div className={`bottom-line ${solidNavbar ? "bottom-line-white" : "bottom-line-black"}`}></div>
                         </div>
                         <div onClick={() => scrollToSection(refSkills)} className="option">
                             <p className="m-0">Skills</p>
-                            <div className="bottom-line bottom-line-black"></div>
+                            <div className={`bottom-line ${solidNavbar ? "bottom-line-white" : "bottom-line-black"}`}></div>
                         </div>
                         <div onClick={() => scrollToSection(refProjects)} className="option">
                             <p className="m-0">Projects</p>
-                            <div className="bottom-line bottom-line-black"></div>
+                            <div className={`bottom-line ${solidNavbar ? "bottom-line-white" : "bottom-line-black"}`}></div>
                         </div>
                         <div onClick={() => setContactModalOpen(true)} className="option">
                             <p className="m-0">Contact Me</p>
-                            <div className="bottom-line bottom-line-black"></div>
+                            <div className={`bottom-line ${solidNavbar ? "bottom-line-white" : "bottom-line-black"}`}></div>
                         </div>
                         <div className="option position-right">
-                            <Link target='_blank' to='https://magenta-nissie-77.tiiny.site'><button id='resumeBtn' className="resume-primary">
+                            <Link target='_blank' to='https://magenta-nissie-77.tiiny.site'><button id='resumeBtn' className={`${solidNavbar ? "resume-secondary" : "resume-primary"}`}>
                                 <div className="align-all-items gap-1">
                                     <p className="m-0">View Resume</p>
                                     <span className="material-symbols-outlined large mt-h">
@@ -173,7 +178,7 @@ const Navbar = () => {
 
                     :
                     <div id='navOptions' className="navbar-options">
-                        <div ref={hamburgerMenu} id='hamburgerIcon' onClick={() => setHamburgerMenuOpen(!hamburgerMenuOpen)} className={`hamburger-icon black mr-3 ${hamburgerMenuOpen && "open-menu-arrow"}`}>
+                        <div ref={hamburgerMenu} id='hamburgerIcon' onClick={() => setHamburgerMenuOpen(!hamburgerMenuOpen)} className={`hamburger-icon ${solidNavbar ? "white" : "black"} mr-3 ${hamburgerMenuOpen && "open-menu-arrow"}`}>
                             <span className="line-1"></span>
                             <span className="line-2"></span>
                             <span className="line-3"></span>

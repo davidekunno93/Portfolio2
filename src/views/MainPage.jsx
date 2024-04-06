@@ -204,8 +204,6 @@ const MainPage = () => {
     const projectPages = [0, 1]
     const [indicatorsVisible, setIndicatorsVisible] = useState(false);
 
-    const [mouseOverAboutSection, setMouseOverAboutSection] = useState(false);
-
 
 
     const addCursorStyle = () => {

@@ -7,7 +7,6 @@ const DataProvider = (props) => {
     const refAbout = useRef(null);
     const refSkills = useRef(null);
     const refProjects = useRef(null);
-    const form = useRef(null);
 
     const handleResize = () => {
         if (document.body.clientWidth < 800) {

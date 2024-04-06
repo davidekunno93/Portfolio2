@@ -1663,7 +1663,7 @@ button:focus-visible {
   position: relative;
   display: flex;
   flex-direction: column;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .hamburger-icon span {
   width: 100%;
@@ -1671,7 +1671,7 @@ button:focus-visible {
   /* background-color: black; */
   /* position: absolute; */
   margin: auto;
-  transition: 0.5s;
+  transition: 0.3s;
 }
 .hamburger-icon.black span {
   background-color: black;
@@ -1686,16 +1686,19 @@ button:focus-visible {
   transform: translate(0px, -1.5px);
 }
 .open-menu-arrow .line-1 {
-  transform: translate(50%, 150%) rotate(45deg);
-  width: 60%;
+  transform: translate(50%, 180%) rotate(45deg);
+  width: 55%;
+}
+.open-menu-arrow .line-2 {
+  width: 75%;
 }
 
 .hamburger-icon.open-menu-arrow {
   transform: rotate(180deg);
 }
 .open-menu-arrow .line-3 {
-  transform: translate(50%, -130%) rotate(-45deg);
-  width: 60%;
+  transform: translate(50%, -155%) rotate(-45deg);
+  width: 55%;
 }
 
 /* My Styles **************************************************************************************** */
@@ -2375,6 +2378,7 @@ p {
   display: flex;
   flex-direction: column;
   padding: 0px 24px;
+  color: #242424;
 }
 
 
