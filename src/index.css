@@ -2506,15 +2506,123 @@ p {
     padding: 32px;
     box-sizing: border-box;
 }
-.img-start {
+.img-start-0 {
   position: absolute;
   left: 0%;
-  top: 50%;
+  top: 5%;
   transition-duration: 6s;
   transition-timing-function: linear;
   transform: translate(-50px, 0px);
 }
-.img-start.end {
+.img-start-0.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-1 {
+  position: absolute;
+  left: 0%;
+  top: 15%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-1.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-2 {
+  position: absolute;
+  left: 0%;
+  top: 25%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-2.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-3 {
+  position: absolute;
+  left: 0%;
+  top: 35%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-3.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-4 {
+  position: absolute;
+  left: 0%;
+  top: 45%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-4.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-5 {
+  position: absolute;
+  left: 0%;
+  top: 55%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-5.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-6 {
+  position: absolute;
+  left: 0%;
+  top: 65%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-6.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-7 {
+  position: absolute;
+  left: 0%;
+  top: 75%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-7.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-8 {
+  position: absolute;
+  left: 0%;
+  top: 85%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-8.end {
+  left: 85%;
+  transform: translate(150px, -50px);
+}
+.img-start-9 {
+  position: absolute;
+  left: 0%;
+  top: 95%;
+  transition-duration: 6s;
+  transition-timing-function: linear;
+  transform: translate(-50px, 0px);
+}
+.img-start-9.end {
   left: 85%;
   transform: translate(150px, -50px);
 }

@@ -449,11 +449,26 @@ const MainPage = () => {
     }, [])
 
     useEffect(() => {
-        flyIcon()
+        flyIcon(3)
+        flyIcon(7)
+        wait(1000).then(() => {
+            flyIcon(1)
+            flyIcon(5)
+            flyIcon(8)
+            wait(1000).then(() => {
+                flyIcon(0)
+                flyIcon(2)
+                flyIcon(6)
+                wait(1000).then(() => {
+                    flyIcon(4)
+                    flyIcon(9)
+                })
+            })
+        })
     }, [mobileMode])
-    const flyIcon = () => {
+    const flyIcon = (i) => {
         if (mobileMode) {
-            const icon = document.getElementById('flyingIcon')
+            const icon = document.getElementById(`flyingIcon-${i}`)
             icon.classList.add('end')
             wait(7000).then(() => {
                 icon.style.transitionDuration = '0s'
@@ -461,12 +476,55 @@ const MainPage = () => {
                 wait(1000).then(() => {
                     icon.style.transitionDuration = '6s'
                     wait(1000).then(() => {
-                        flyIcon()
+                        // flyIcon()
                     })
                 })
             })
+
         }
     }
+    const flyingIcons = [
+        {
+            iconName: "React",
+            imgUrl: "https://i.imgur.com/ULgwPsr.png",
+        },
+        {
+            iconName: "Python",
+            imgUrl: "https://i.imgur.com/GwT9tpK.png",
+        },
+        {
+            iconName: "JavaScript",
+            imgUrl: "https://i.imgur.com/yZiKC8W.png",
+        },
+        {
+            iconName: "Coding",
+            imgUrl: "https://i.imgur.com/Umfxuhc.png",
+        },
+        {
+            iconName: "SQL",
+            imgUrl: "https://i.imgur.com/bVbjJVH.png",
+        },
+        {
+            iconName: "git",
+            imgUrl: "https://i.imgur.com/zx2l9IT.png",
+        },
+        {
+            iconName: "Firebase",
+            imgUrl: "https://i.imgur.com/Fa0qioC.png",
+        },
+        {
+            iconName: "VS Code",
+            imgUrl: "https://i.imgur.com/IQzuwGx.png",
+        },
+        {
+            iconName: "PostgreSQL",
+            imgUrl: "https://i.imgur.com/N5pxLHY.png",
+        },
+        {
+            iconName: "CMD Terminal",
+            imgUrl: "https://i.imgur.com/yl6vHT4.png",
+        },
+    ]
 
     return (
         <>
@@ -478,7 +536,10 @@ const MainPage = () => {
                     <div className="hero-section">
                         <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
                             {mobileMode &&
-                                <img id='flyingIcon' src="https://i.imgur.com/ULgwPsr.png" alt="" className="img-small img-start" />
+                                // <img id='flyingIcon' src="https://i.imgur.com/ULgwPsr.png" alt="" className="img-small img-start-0" />
+                                flyingIcons.map((icon, index) => {
+                                    return <img id={`flyingIcon-${index}`} src={icon.imgUrl} alt="" className={`img-small img-start-${index}`} />
+                                })
                             }
                             <Slide direction={`${mobileMode ? 'down' : 'left'}`} duration={800} className={`${mobileMode ? "flx-c-reverse" : "flx-r flx-1"}`} triggerOnce>
                                 <div className={`${mobileMode ? "bottom-side" : "left-side"} flx-1 flx`}>
