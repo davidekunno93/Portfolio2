@@ -451,17 +451,20 @@ const MainPage = () => {
     useEffect(() => {
         flyIcon(3)
         flyIcon(7)
-        wait(1000).then(() => {
+        flyIcon(11)
+        wait(1800).then(() => {
             flyIcon(1)
             flyIcon(5)
             flyIcon(8)
-            wait(1000).then(() => {
+            wait(1800).then(() => {
                 flyIcon(0)
                 flyIcon(2)
                 flyIcon(6)
-                wait(1000).then(() => {
+                flyIcon(12)
+                wait(1800).then(() => {
                     flyIcon(4)
                     flyIcon(9)
+                    flyIcon(10)
                 })
             })
         })
@@ -470,13 +473,13 @@ const MainPage = () => {
         if (mobileMode) {
             const icon = document.getElementById(`flyingIcon-${i}`)
             icon.classList.add('end')
-            wait(7000).then(() => {
+            wait(6400).then(() => {
                 icon.style.transitionDuration = '0s'
                 icon.classList.remove('end')
-                wait(1000).then(() => {
+                wait(400).then(() => {
                     icon.style.transitionDuration = '6s'
-                    wait(1000).then(() => {
-                        // flyIcon()
+                    wait(400).then(() => {
+                        flyIcon(i)
                     })
                 })
             })
@@ -485,47 +488,72 @@ const MainPage = () => {
     }
     const flyingIcons = [
         {
-            iconName: "React",
-            imgUrl: "https://i.imgur.com/ULgwPsr.png",
-        },
-        {
-            iconName: "Python",
-            imgUrl: "https://i.imgur.com/GwT9tpK.png",
-        },
-        {
-            iconName: "JavaScript",
-            imgUrl: "https://i.imgur.com/yZiKC8W.png",
-        },
-        {
-            iconName: "Coding",
-            imgUrl: "https://i.imgur.com/Umfxuhc.png",
-        },
-        {
-            iconName: "SQL",
-            imgUrl: "https://i.imgur.com/bVbjJVH.png",
-        },
-        {
-            iconName: "git",
-            imgUrl: "https://i.imgur.com/zx2l9IT.png",
-        },
-        {
-            iconName: "Firebase",
-            imgUrl: "https://i.imgur.com/Fa0qioC.png",
-        },
-        {
+            // 0
             iconName: "VS Code",
             imgUrl: "https://i.imgur.com/IQzuwGx.png",
         },
         {
+            // 1
+            iconName: "Python",
+            imgUrl: "https://i.imgur.com/GwT9tpK.png",
+        },
+        {
+            // 2
+            iconName: "JavaScript",
+            imgUrl: "https://i.imgur.com/yZiKC8W.png",
+        },
+        {
+            // 3
+            iconName: "Coding",
+            imgUrl: "https://i.imgur.com/Umfxuhc.png",
+        },
+        {
+            // 4
+            iconName: "SQL",
+            imgUrl: "https://i.imgur.com/bVbjJVH.png",
+        },
+        {
+            // 5
+            iconName: "git",
+            imgUrl: "https://i.imgur.com/zx2l9IT.png",
+        },
+        {
+            // 6
+            iconName: "Firebase",
+            imgUrl: "https://i.imgur.com/Fa0qioC.png",
+        },
+        {
+            // 7
+            iconName: "React",
+            imgUrl: "https://i.imgur.com/ULgwPsr.png",
+        },
+        {
+            // 8
             iconName: "PostgreSQL",
             imgUrl: "https://i.imgur.com/N5pxLHY.png",
         },
         {
+            // 9
             iconName: "CMD Terminal",
             imgUrl: "https://i.imgur.com/yl6vHT4.png",
         },
+        {
+            // 10
+            iconName: "React",
+            imgUrl: "https://i.imgur.com/ULgwPsr.png",
+        },
+        {
+            // 11
+            iconName: "CMD Terminal",
+            imgUrl: "https://i.imgur.com/yl6vHT4.png",
+        },
+        {
+            // 12
+            iconName: "JavaScript",
+            imgUrl: "https://i.imgur.com/yZiKC8W.png",
+        },
     ]
-
+    
     return (
         <>
             <ContactModal open={contactModalOpen} onClose={() => setContactModalOpen(false)} />
@@ -534,11 +562,13 @@ const MainPage = () => {
 
                 <Fade delay={100} triggerOnce>
                     <div className="hero-section">
-                        <div className={`hero-absolute ${mobileMode ? "flx-c-reverse" : "flx-r"}`}>
+                        <div className={`hero-absolute ${mobileMode ? "flx-c-reverse gray-bg" : "flx-r"}`}>
                             {mobileMode &&
                                 // <img id='flyingIcon' src="https://i.imgur.com/ULgwPsr.png" alt="" className="img-small img-start-0" />
                                 flyingIcons.map((icon, index) => {
-                                    return <img id={`flyingIcon-${index}`} src={icon.imgUrl} alt="" className={`img-small img-start-${index}`} />
+                                    let threes = index % 3 === 0 ? true : false
+                                    let fours = index % 4 === 0 ? true : false
+                                    return <img id={`flyingIcon-${index}`} src={icon.imgUrl} alt="" className={`${fours ? "img-smedium" : threes ? "img-xsmall" : "img-small"} img-start img-start-${index}`} />
                                 })
                             }
                             <Slide direction={`${mobileMode ? 'down' : 'left'}`} duration={800} className={`${mobileMode ? "flx-c-reverse" : "flx-r flx-1"}`} triggerOnce>
