@@ -208,6 +208,9 @@ const MainPage = () => {
         } else {
             sustainProjectIndex()
         }
+        if (!indicatorsVisible) {
+            setIndicatorsVisible(true);
+        }
     }
     const decrementProjectIndex = () => {
         if (projectIndex > 0) {
@@ -226,13 +229,11 @@ const MainPage = () => {
 
     const projectInner = useRef(null);
     const projectPage = useRef(null);
-    const [isDown, setIsDown] = useState(false);
-    // const [startX, setStartX] = useState(null);
-    let start = null
+
+    // touch swipe code
     let deltaX = null
     const touchStarted = (e) => {
         if (projectInner.current.contains(e.target)) {
-            start = e.changedTouches[0].pageX
             let startX = e.changedTouches[0].pageX
             // console.log(e.changedTouches[0].pageX);
             projectInner.current.style.transitionTimingFunction = 'linear'
@@ -241,62 +242,32 @@ const MainPage = () => {
         }
     }
 
-    // useEffect(() => {
-    //     window.addEventListener('touchstart', (e) => {
-    //         if (projectInner.current.contains(e.target)) {
-    //             start = e.changedTouches[0].pageX
-    //             let startX = e.changedTouches[0].pageX
-    //             // console.log(e.changedTouches[0].pageX);
-    //             projectInner.current.style.transitionTimingFunction = 'linear'
-    //             // console.log("width: "+projectPage.current.offsetWidth)
-    //             window.addEventListener('touchmove', (e) => trackMouse(e, startX))
-    //             setIsDown(!isDown)
-    //         }
-    //     })
-    //     // window.addEventListener('touchend', (e) => {touchended(e)})
-    // }, [])
-    // useEffect(() => {
-    //     window.addEventListener('touchend', (e) => {touchEnded(e)})
-    //     return window.removeEventListener('touchend', touchended)
-    // }, [isDown])
-    const printI = () => {
-        console.log("currI = " + projectIndex)
-    }
+
     const touchEnded = (e) => {
         if (projectInner.current.contains(e.target)) {
             // window.removeEventListener('touchmove', trackMouse)
             console.log('touch ended')
             if ((-deltaX) > 0.2 * projectPage.current.offsetWidth) {
                 incrementProjectIndex()
-                console.log('increment')
+                // console.log('increment')
             } else if (deltaX > 0.2 * projectPage.current.offsetWidth) {
                 decrementProjectIndex()
-                console.log('decrement')
+                // console.log('decrement')
             } else {
                 sustainProjectIndex()
-                // projectInner.current.style.transform = `translateX(-${projectIndex * 100}%)`
-                // console.log("curr index: "+projectIndex)
-                console.log('else block')
+                // console.log('else block')
             }
             deltaX = null
             projectInner.current.style.transitionTimingFunction = 'ease'
-            // projectInner.current.style.transform = `translateX(-${newIndex*100}%)`
         }
     }
-    const [swipe, setSwipe] = useState(null);
     const trackMouse = (e, startX) => {
-        // e.preventDefault()
         if (projectInner.current.contains(e.target)) {
             // console.log(e.changedTouches[0].pageX - startX)
             deltaX = e.changedTouches[0].pageX - startX
-            let currentProjectIndex = projectIndex
+            // let currentProjectIndex = projectIndex
             // projectInner.current.style.transform = `translateX(calc(-${currentProjectIndex * 100}% + ${1.2 * deltaX}px))`
-            // if (deltaX < 0 && (-deltaX) > 0.1*projectPage.current.offsetWidth) {
-            //     console.log('slide')
-            //     // setProjectIndex(1)
-            // }
         }
-
     }
 
 
@@ -530,7 +501,7 @@ const MainPage = () => {
         {
             // 8
             iconName: "PostgreSQL",
-            imgUrl: "https://i.imgur.com/N5pxLHY.png",
+            imgUrl: "https://i.imgur.com/qUgFKZ3.png",
         },
         {
             // 9
@@ -755,25 +726,25 @@ const MainPage = () => {
                 </div>
 
 
-                <div ref={refProjects} className={`flx ${mobileMode ? "just-ce mb-8" : "ml-6 py-8"}`}>
+                <div ref={refProjects} className={`flx ${mobileMode ? "just-ce mb-6" : "ml-6 py-8"}`}>
                     <div className="title-box">
-                        <p onClick={() => { printI(); sustainProjectIndex() }} className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
+                        <p className={`m-0 ${mobileMode ? "section-subtitle" : "section-title"}`}>Recent Projects</p>
                         <div className={`title-paint`}></div>
                     </div>
 
                 </div>
 
-                {indicatorsVisible &&
-                    <div className="dot-indicators just-ce mb-4">
+                
+                    <div className={`dot-indicators just-ce mb-4 ${!indicatorsVisible && "hidden-o"}`}>
                         {projectPages.map((page, index) => {
                             return <div key={index} onClick={() => setProjectIndex(index)} className={`${index === projectIndex ? "dot-selected" : "dot-unselected"}`}></div>
                         })}
                     </div>
-                }
+                
                 <div onTouchStart={touchStarted} onTouchMove={trackMouse} onTouchEnd={touchEnded} className="projects-section my-8">
 
                     <div className="carousel-window">
-                        <div ref={projectInner} className="inner" style={{ transform: `translateX(calc(-${projectIndex * 100}% - ${swipe ? swipe : "0"}px  ))` }}>
+                        <div ref={projectInner} className="inner" style={{ transform: `translateX(calc(-${projectIndex * 100}% ))` }}>
                             <div className="carousel-item">
 
                                 <div ref={projectPage} className={`project-page flx-c ${mobileMode && "pt-4"}`}>

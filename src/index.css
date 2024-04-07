@@ -808,6 +808,12 @@ button:focus-visible {
   margin-bottom: 50px;
 }
 
+.mb-6 {
+  margin-bottom: 60px;
+}
+.mb-7 {
+  margin-bottom: 70px;
+}
 .mb-8 {
   margin-bottom: 80px;
 }
@@ -1677,6 +1683,8 @@ button:focus-visible {
   flex-direction: row;
   align-items: center;
   gap: 12px;
+  opacity: 1;
+  transition-duration: 0.2s;
 }
 .dot-selected {
   height: 16px;
